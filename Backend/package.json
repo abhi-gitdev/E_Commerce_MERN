@@ -1,0 +1,24 @@
+{
+  "name": "fruit-route-backend",
+  "version": "1.0.0",
+  "description": "This is a online fresh juice delivery app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrishnaM256/Fruit-Route.git"
+  },
+  "author": "Krishna Magar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrishnaM256/Fruit-Route/issues"
+  },
+  "homepage": "https://github.com/KrishnaM256/Fruit-Route#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.3"
+  }
+}
