@@ -5,7 +5,7 @@ const port = process.env.PORT || 8000
 
 connectDB()
 const app = express()
-
+app.use(express.json())
 app.use('/api/products', require('./routes/productRoutes'))
 
 app.listen(port, () => {
