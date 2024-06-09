@@ -1,10 +1,15 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
-const User = require('../models/userModel')
+const { validate, User } = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 exports.registerUser = asyncHandler(async (req, res) => {
+  const { error } = validate(req.body)
+  if (error) {
+    return res.status(400).send({ message: error.details[0].message })
+  }
   const { firstName, lastName, email, phone, address, city, password } =
     req.body
   if (
@@ -18,9 +23,28 @@ exports.registerUser = asyncHandler(async (req, res) => {
   ) {
     return res.status(400).send({ message: 'All fields are mandatory' })
   }
+  const oldUser = await User.findOne({ email })
+  if (oldUser) {
+    return res.status(400).send({ message: 'User already exist' })
+  }
   const hashPassword = await bcrypt.hash(password, 10)
-  const user = await User.create({ ...req.body, password: hashPassword })
-  res.status(200).send(user)
+  const newUser = await User.create({ ...req.body, password: hashPassword })
+  res.status(200).send(newUser)
+})
+
+exports.loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body
+  if (!email || !password) {
+    return res.status(400).send({ message: 'All fields are mandatory' })
+  }
+  const user = await User.findOne({ email })
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_PRIVATEKEY, {
+      expiresIn: '5d',
+    })
+    res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
+    res.status(200).send({ message: 'Login successfully' })
+  } else res.status(400).send({ message: 'Email or Password is invalid' })
 })
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
