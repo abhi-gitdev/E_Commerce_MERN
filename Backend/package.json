@@ -18,6 +18,7 @@
   "homepage": "https://github.com/KrishnaM256/Fruit-Route#readme",
   "dependencies": {
     "async-handler": "^0.0.3",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",

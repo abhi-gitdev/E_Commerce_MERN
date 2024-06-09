@@ -17,8 +17,6 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: Number,
       required: [true, 'Please enter phone number'],
-      max: [10, 'Phone number should be 10 digit'],
-      min: [10, 'Phone number should be 10 digit'],
     },
     address: {
       type: String,
@@ -31,11 +29,11 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please enter password'],
-      maxLength: [15, 'Password cannot exceed 15 characters'],
-      minLength: [8, 'Password should contain at least 8 characters'],
     },
   },
   {
     timestamps: true,
   }
 )
+
+module.exports = mongoose.model('User', userSchema)
