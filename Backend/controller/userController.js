@@ -4,7 +4,7 @@ const { validate, User } = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-const nodemail = require('nodemailer')
+const sendMail = require('../utils/sendMail')
 
 exports.registerUser = asyncHandler(async (req, res) => {
   const { error } = validate(req.body)
@@ -40,7 +40,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
   }
   const user = await User.findOne({ email })
   if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ id: user._id }, process.env.JWT_PRIVATEKEY, {
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY, {
       expiresIn: '5d',
     })
     res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
@@ -57,6 +57,10 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   if (!user) {
     return res.status(404).send({ message: 'User does not exist' })
   }
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY, {
+    expiresIn: '1d',
+  })
+  sendMail(email)
 })
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
