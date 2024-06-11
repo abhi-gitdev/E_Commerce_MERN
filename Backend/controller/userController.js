@@ -4,6 +4,7 @@ const { validate, User } = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
+const nodemail = require('nodemailer')
 
 exports.registerUser = asyncHandler(async (req, res) => {
   const { error } = validate(req.body)
@@ -45,6 +46,17 @@ exports.loginUser = asyncHandler(async (req, res) => {
     res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
     res.status(200).send({ message: 'Login successfully' })
   } else res.status(400).send({ message: 'Email or Password is invalid' })
+})
+
+exports.forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body
+  if (!email) {
+    return res.status(400).send({ message: 'Please enter email' })
+  }
+  const user = await User.find({ email })
+  if (!user) {
+    return res.status(404).send({ message: 'User does not exist' })
+  }
 })
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
