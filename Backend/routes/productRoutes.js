@@ -19,7 +19,7 @@ router
 router
   .route('/:id')
   .get(getProduct)
-  .put(isUserAuthenticated, isUserAuthorized, updateProduct)
-  .delete(isUserAuthenticated, isUserAuthorized, deleteProduct)
+  .put(isUserAuthenticated, isUserAuthorized('admin'), updateProduct)
+  .delete(isUserAuthenticated, isUserAuthorized('admin'), deleteProduct)
 
 module.exports = router
