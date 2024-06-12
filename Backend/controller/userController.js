@@ -30,7 +30,14 @@ exports.registerUser = asyncHandler(async (req, res) => {
   }
   const hashPassword = await bcrypt.hash(password, 10)
   const newUser = await User.create({ ...req.body, password: hashPassword })
-  res.status(200).send(newUser)
+  const token = jwt.sign({ _id: newUser._id }, process.env.JWT_PRIVATEKEY, {
+    expiresIn: '5d',
+  })
+  res.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+  })
+  res.status(200).send({ message: 'Registered successfully' })
 })
 
 exports.loginUser = asyncHandler(async (req, res) => {
@@ -43,9 +50,21 @@ exports.loginUser = asyncHandler(async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY, {
       expiresIn: '5d',
     })
-    res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
+    res.cookie('token', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    })
     res.status(200).send({ message: 'Login successfully' })
   } else res.status(400).send({ message: 'Email or Password is invalid' })
+})
+
+exports.logoutUser = asyncHandler(async (req, res) => {
+  const { token } = req.cookies
+  if (!token) {
+    return res.status(400).send({ message: 'Please login' })
+  }
+  res.cookie('token', null, { httpOnly: true, expires: new Date(Date.now()) })
+  res.status(200).send({ message: 'Log out successfully' })
 })
 
 exports.forgotPassword = asyncHandler(async (req, res) => {
@@ -60,7 +79,7 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY, {
     expiresIn: '1d',
   })
-  const encodeToken = encodeURIComponent(token).replace(/\./,'%R')
+  const encodeToken = encodeURIComponent(token).replace(/\./, '%R')
   sendMail(email)
 })
 
