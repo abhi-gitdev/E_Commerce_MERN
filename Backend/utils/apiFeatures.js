@@ -16,6 +16,7 @@ class ApiFeature {
     this.query = this.query.find({ ...keyword })
     return this
   }
+
   filter() {
     const queryCopy = { ...this.queryStr }
     const removeFields = ['keyword', 'page', 'limit']
@@ -23,6 +24,14 @@ class ApiFeature {
     let queryStr = JSON.stringify(queryCopy)
     queryStr = queryStr.replace(/\b(lt|gt|lte|gte)\b/g, (key) => `$${key}`)
     this.query = this.query.find(JSON.parse(queryStr))
+    console.log(queryStr)
+    return this
+  }
+
+  pagination(resultPerPage) {
+    const currPage = this.queryStr.page
+    const skip = resultPerPage * (currPage - 1)
+    this.query = this.query.limit(resultPerPage).skip(skip)
     return this
   }
 }
