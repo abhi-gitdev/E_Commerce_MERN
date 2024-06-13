@@ -11,6 +11,7 @@ const isUserAuthenticated = asyncHandler(async (req, res, next) => {
   req.user = await User.findById(decoded._id)
   next()
 })
+
 const isUserAuthorized = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {

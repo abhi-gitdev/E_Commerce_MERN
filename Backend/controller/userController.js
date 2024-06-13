@@ -72,15 +72,35 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   if (!email) {
     return res.status(400).send({ message: 'Please enter email' })
   }
-  const user = await User.find({ email })
+  const user = await User.findOne({ email })
+  console.log(user)
   if (!user) {
     return res.status(404).send({ message: 'User does not exist' })
   }
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY, {
-    expiresIn: '1d',
-  })
-  const encodeToken = encodeURIComponent(token).replace(/\./, '%R')
-  sendMail(email)
+  const resetToken = user.getResetPasswordToken()
+  await user.save({ validateBeforeSave: false })
+  const resetURL = `${req.protocol}://${req.get(
+    'host'
+  )}/password/reset/${resetToken}`
+  const subject = ' Password Reset Request'
+  const message = `Dear ${user.firstName},\n\n
+We received a request to reset your password. You can reset your password by clicking the link below:
+\n\n
+${resetURL}
+\n\n
+If you did not request a password reset, please disregard this email.
+\n\n
+Thank you,\n
+Sip & Drip`
+  try {
+    sendMail(email, subject, message)
+    return res.status(200).send({ message: 'Email sent successfully' })
+  } catch (e) {
+    user.resetPasswordExpire = undefined
+    user.resetPasswordToken = undefined
+    user.save({ validateBeforeSave: false })
+    return res.status(400).send({ message: 'Failed to send mail' })
+  }
 })
 
 exports.getAllUsers = asyncHandler(async (req, res) => {

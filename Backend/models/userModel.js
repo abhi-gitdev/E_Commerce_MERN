@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const joi = require('joi')
 const passwordComplexity = require('joi-password-complexity')
+const crypto = require('crypto')
 
 const userSchema = new mongoose.Schema(
   {
@@ -44,11 +45,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'user',
     },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
   },
   {
     timestamps: true,
   }
 )
+
+userSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString('hex')
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex')
+  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000
+  return resetToken
+}
 
 const validate = (data) => {
   const schema = joi.object({

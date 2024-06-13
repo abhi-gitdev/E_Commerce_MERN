@@ -16,6 +16,7 @@ router
   .route('/')
   .get(getAllProducts)
   .post(isUserAuthenticated, isUserAuthorized('admin'), createProduct)
+
 router
   .route('/:id')
   .get(getProduct)

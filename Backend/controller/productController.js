@@ -26,6 +26,7 @@ exports.getProduct = asyncHandler(async (req, res) => {
 })
 
 exports.createProduct = asyncHandler(async (req, res) => {
+  req.body.user = req.user.id
   const { name, description, price, quantity, images } = req.body
   if (!name || !description || !price || !quantity || !images) {
     return res.status(400).send({ message: 'All fields are mandatory' })
