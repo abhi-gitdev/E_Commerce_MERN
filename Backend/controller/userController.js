@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const sendMail = require('../utils/sendMail')
+const crypto = require('crypto')
 
 exports.registerUser = asyncHandler(async (req, res) => {
   const { error } = validate(req.body)
@@ -72,8 +73,9 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   if (!email) {
     return res.status(400).send({ message: 'Please enter email' })
   }
+
   const user = await User.findOne({ email })
-  console.log(user)
+
   if (!user) {
     return res.status(404).send({ message: 'User does not exist' })
   }
@@ -82,18 +84,10 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   const resetURL = `${req.protocol}://${req.get(
     'host'
   )}/password/reset/${resetToken}`
-  const subject = ' Password Reset Request'
-  const message = `Dear ${user.firstName},\n\n
-We received a request to reset your password. You can reset your password by clicking the link below:
-\n\n
-${resetURL}
-\n\n
-If you did not request a password reset, please disregard this email.
-\n\n
-Thank you,\n
-Sip & Drip`
+  const subject = 'Password Reset Request'
+  const message = `Dear ${user.firstName},\n\nWe received a request to reset your password. You can reset your password by clicking the link below:\n\n${resetURL}\n\nIf you did not request a password reset, please disregard this email.\n\nThank you,\nSip & Drip`
   try {
-    sendMail(email, subject, message)
+    sendMail({ email, subject, message })
     return res.status(200).send({ message: 'Email sent successfully' })
   } catch (e) {
     user.resetPasswordExpire = undefined
@@ -101,6 +95,37 @@ Sip & Drip`
     user.save({ validateBeforeSave: false })
     return res.status(400).send({ message: 'Failed to send mail' })
   }
+})
+
+exports.resetPassword = asyncHandler(async (req, res) => {
+  const resetToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex')
+  const user = await User.findOne({
+    resetPasswordToken: resetToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  })
+  if (!user) {
+    return res
+      .status(404)
+      .send({ message: 'Reset password token has been expired or not valid' })
+  }
+  const { password, confirmPassword } = req.body
+  if (!password || !confirmPassword) {
+    return res.status(400).send({ message: 'Please enter reset password' })
+  }
+  if (password != confirmPassword) {
+    return res
+      .status(400)
+      .send({ message: 'Password does not match Confirm Password' })
+  }
+  const hashPassword = await bcrypt.hash(password, 10)
+  user.password = hashPassword
+  user.resetPasswordToken = undefined
+  user.resetPasswordToken = undefined
+  await user.save()
+  res.status(200).send({ message: 'Successfully changed the password' })
 })
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
