@@ -15,7 +15,8 @@ const isUserAuthenticated = asyncHandler(async (req, res, next) => {
 const isUserAuthorized = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return res
+      return
+      res
         .status(400)
         .send({ message: 'User is not authorized to access this resource' })
     }

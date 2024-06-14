@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const sendMail = require('../utils/sendMail')
 const crypto = require('crypto')
+const { log } = require('console')
 
 exports.registerUser = asyncHandler(async (req, res) => {
   const { error } = validate(req.body)
@@ -147,4 +148,15 @@ exports.deleteUser = asyncHandler(async (req, res) => {
   }
   await User.findByIdAndDelete(id)
   res.status(200).send(user)
+})
+
+exports.updateProfile = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { ...req.body },
+    {
+      new: true,
+    }
+  )
+  res.status(200).send({ message: 'Successfully updated profile' })
 })
