@@ -13,6 +13,8 @@ const {
   isUserAuthorized,
 } = require('../utils/isUserAuthenticated')
 
+router.route('/review').put(isUserAuthenticated, reviewProduct)
+
 router
   .route('/')
   .get(getAllProducts)
@@ -23,7 +25,5 @@ router
   .get(getProduct)
   .put(isUserAuthenticated, isUserAuthorized('admin'), updateProduct)
   .delete(isUserAuthenticated, isUserAuthorized('admin'), deleteProduct)
-
-router.route('/review').put(isUserAuthenticated, reviewProduct)
 
 module.exports = router

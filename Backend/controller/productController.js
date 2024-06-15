@@ -59,7 +59,7 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
   if (!product) {
     return res.status(404).send({ message: 'No product found' })
   }
-  const deleteProduct = await Product.findByIdAndDelete(id)
+  await Product.findByIdAndDelete(id)
   res.status(200).send({ message: 'Deleted product successfully' })
 })
 
@@ -93,9 +93,8 @@ exports.reviewProduct = asyncHandler(async (req, res) => {
     product.numOfReviews = product.reviews.length
   }
   let avg = 0
-  product.rating =
-    product.reviews.forEach((rev) => (avg += rev.rating)) /
-    product.reviews.length
+  product.reviews.forEach((rev) => (avg += rev.rating))
+  product.rating = avg / product.reviews.length
   await product.save({ validateBeforeSave: false })
   res.status(200).send({ message: 'Thank you for your review!' })
 })
