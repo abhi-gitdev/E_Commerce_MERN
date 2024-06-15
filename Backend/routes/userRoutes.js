@@ -7,6 +7,8 @@ const {
   forgotPassword,
   resetPassword,
   updateProfile,
+  getUser,
+  updateUserRole,
 } = require('../controller/userController')
 const {
   isUserAuthenticated,
@@ -16,11 +18,17 @@ const router = require('express').Router()
 
 router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)
-router.route('/logout').post(logoutUser)
+router.route('/logout').get(logoutUser)
 router.route('/forgot_password').post(forgotPassword)
-router.route('/reset_password/:token').post(resetPassword)
-router.route('/update/profile').post(isUserAuthenticated, updateProfile)
-router.route('/').get(isUserAuthenticated, isUserAuthorized, getAllUsers)
-router.route('/:id').delete(isUserAuthenticated, isUserAuthorized, deleteUser)
+router.route('/reset_password/:token').put(resetPassword)
+router.route('/update/profile').put(isUserAuthenticated, updateProfile)
+router
+  .route('/')
+  .get(isUserAuthenticated, isUserAuthorized('admin'), getAllUsers)
+router
+  .route('/:id')
+  .delete(isUserAuthenticated, isUserAuthorized('admin'), deleteUser)
+  .get(isUserAuthenticated, isUserAuthorized('admin'), getUser)
+  .put(isUserAuthenticated, isUserAuthorized('admin'), updateUserRole)
 
 module.exports = router

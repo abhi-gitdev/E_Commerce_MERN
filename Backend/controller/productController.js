@@ -62,3 +62,40 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
   const deleteProduct = await Product.findByIdAndDelete(id)
   res.status(200).send({ message: 'Deleted product successfully' })
 })
+
+exports.reviewProduct = asyncHandler(async (req, res) => {
+  const { rating, comment, productId } = req.body
+  if (!rating) {
+    return res.status(400).send({ message: 'Please provide a rating.' })
+  }
+  const nameUser = `${req.user.firstName} ${req.user.lastName}`
+  const review = {
+    user: req.user._id,
+    name: nameUser,
+    rating: Number(rating),
+    comment,
+  }
+  const product = await Product.findById(productId)
+  if (!product) {
+    return res.status(404).send({ message: 'Product not found.' })
+  }
+  const isReviewed = product.reviews.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  )
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.user.toString() === req.user._id.toString()) {
+        ;(rev.rating = Number(rating)), (rev.comment = comment)
+      }
+    })
+  } else {
+    product.reviews.push(review)
+    product.numOfReviews = product.reviews.length
+  }
+  let avg = 0
+  product.rating =
+    product.reviews.forEach((rev) => (avg += rev.rating)) /
+    product.reviews.length
+  await product.save({ validateBeforeSave: false })
+  res.status(200).send({ message: 'Thank you for your review!' })
+})

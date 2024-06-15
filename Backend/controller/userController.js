@@ -137,6 +137,15 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
   res.status(200).send(users)
 })
 
+exports.getUser = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  const user = await User.findById(id)
+  if (!user) {
+    return res.status(404).send({ message: 'User not found' })
+  }
+  res.status(200).send(user)
+})
+
 exports.deleteUser = asyncHandler(async (req, res) => {
   const id = req.params.id
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -159,4 +168,23 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     }
   )
   res.status(200).send({ message: 'Successfully updated profile' })
+})
+
+exports.updateUserRole = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  const { name, email, role } = req.body
+  if (!role && !email && !name) {
+    return res.status(400).send({ message: 'Please enter details' })
+  }
+  const updated = {
+    name: name,
+    email: email,
+    role: role,
+  }
+  const user = await User.findByIdAndUpdate(id, updated, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  })
+  res.status(200).send({ message: 'Updated successfully' })
 })
