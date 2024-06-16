@@ -98,3 +98,17 @@ exports.reviewProduct = asyncHandler(async (req, res) => {
   await product.save({ validateBeforeSave: false })
   res.status(200).send({ message: 'Thank you for your review!' })
 })
+
+exports.getProductReviews = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.query.id)
+  if (!product) {
+    return res.status(404).send({ message: 'Product not found' })
+  }
+  return res.status(200).send(product.reviews)
+})
+exports.deleteReview = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.query.id)
+  if (!product) {
+    return res.status(404).send({ message: 'Product not found' })
+  }
+})
