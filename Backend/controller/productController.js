@@ -106,9 +106,27 @@ exports.getProductReviews = asyncHandler(async (req, res) => {
   }
   return res.status(200).send(product.reviews)
 })
+
 exports.deleteReview = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.query.id)
+  const product = await Product.findById(req.query.productId)
   if (!product) {
     return res.status(404).send({ message: 'Product not found' })
   }
+  const reviews = product.reviews.filter(
+    (rev) => rev._id.toString() !== req.query.id.toString()
+  )
+  let avg = 0
+  reviews.forEach((rev) => (avg += rev.rating))
+  const rating = avg / reviews.length
+  const numOfReviews = reviews.length
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    { reviews, rating, numOfReviews },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  )
+  res.status(200).send({ message: 'Product review deleted successfully' })
 })

@@ -7,6 +7,8 @@ const {
   updateProduct,
   deleteProduct,
   reviewProduct,
+  getProductReviews,
+  deleteReview,
 } = require('../controller/productController')
 const {
   isUserAuthenticated,
