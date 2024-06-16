@@ -28,4 +28,9 @@ router
 
 router.route('/review').put(isUserAuthenticated, reviewProduct)
 
+router
+  .route('/reviews')
+  .get(getProductReviews)
+  .delete(isUserAuthenticated, deleteReview)
+
 module.exports = router
