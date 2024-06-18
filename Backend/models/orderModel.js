@@ -25,9 +25,9 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
   },
-  orderItem: [
+  orderItems: [
     {
-      prodctId: {
+      productId: {
         type: mongoose.Schema.ObjectId,
         ref: 'Product',
         required: [true, 'Product id is required'],
@@ -50,7 +50,7 @@ const orderSchema = new mongoose.Schema({
       },
     },
   ],
-  userId: {
+  user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: [true, 'User id is required'],

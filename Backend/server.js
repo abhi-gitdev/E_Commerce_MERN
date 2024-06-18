@@ -17,6 +17,7 @@ app.use(cookieParser())
 
 app.use('/api/products', require('./routes/productRoutes'))
 app.use('/api/user', require('./routes/userRoutes'))
+app.use('/api/orders', require('./routes/orderRoutes'))
 
 const server = app.listen(port, () => {
   console.log(`Running on http://localhost:${port}`)
