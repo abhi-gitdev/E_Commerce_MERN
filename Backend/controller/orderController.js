@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const Order = require('../models/orderModel')
+const Product = require('../models/productModel')
 
 exports.newOrder = asyncHandler(async (req, res) => {
   const {
@@ -81,3 +82,28 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
   })
   res.status(200).send(orders)
 })
+
+exports.updateOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+  if (!order) {
+    return res.status(404).send({ message: 'No order found' })
+  }
+  if (order.orderStatus === 'Delivered') {
+    return res.status(400).send({ message: 'Order delivered already' })
+  }
+  order.orderItems.forEach(async (order) => {
+    await updateStock(order.productId, order.quantity)
+  })
+  order.orderStatus = req.body.status
+  if (req.body.status === 'Delivered') {
+    order.deliveredAt = Date.now()
+  }
+  await order.save({ validateBeforeSave: false })
+  res.status(200).send({ message: 'Order updated successfully' })
+})
+
+async function updateStock(id, quantity) {
+  const product = await Product.findById(id)
+  product.quantity -= quantity
+  await product.save({ validateBeforeSave: false })
+}
