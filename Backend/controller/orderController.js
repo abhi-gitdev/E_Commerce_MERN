@@ -67,4 +67,17 @@ exports.singleOrder = asyncHandler(async (req, res) => {
   res.status(200).send(order)
 })
 
-exports.getAllOrders = asyncHandler(async (req, res) => {})
+exports.getAllOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find().populate(
+    'user',
+    'firstName lastName email phone'
+  )
+  if (!orders) {
+    return res.status(404).send({ message: 'No orders yet' })
+  }
+  let totalAmount = 0
+  orders.forEach((order) => {
+    totalAmount += order.totalPrice
+  })
+  res.status(200).send(orders)
+})
