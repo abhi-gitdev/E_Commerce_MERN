@@ -107,3 +107,8 @@ async function updateStock(id, quantity) {
   product.quantity -= quantity
   await product.save({ validateBeforeSave: false })
 }
+
+exports.deleteOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findByIdAndDelete(req.params.id)
+  res.status(200).send({ message: 'Order deleted successfully' })
+})
