@@ -55,3 +55,16 @@ exports.myOrders = asyncHandler(async (req, res) => {
   }
   res.status(200).send(orders)
 })
+
+exports.singleOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate(
+    'user', // this method is used to populate the user field of the Order with name and email field of the User to which it is referencing
+    `firstName lastName email`
+  )
+  if (!order) {
+    return res.status(404).send({ message: 'No order found' })
+  }
+  res.status(200).send(order)
+})
+
+exports.getAllOrders = asyncHandler(async (req, res) => {})
