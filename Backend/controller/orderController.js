@@ -49,7 +49,6 @@ exports.newOrder = asyncHandler(async (req, res) => {
 })
 
 exports.myOrders = asyncHandler(async (req, res) => {
-  console.log('hgf')
   const orders = await Order.find({ user: req.user._id })
   if (!orders) {
     return res.status(404).send({ message: 'No orders found' })
@@ -88,6 +87,9 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   if (!order) {
     return res.status(404).send({ message: 'No order found' })
   }
+  if (!req.body.status) {
+    return res.status(400).send({ message: 'Please enter status' })
+  }
   if (order.orderStatus === 'Delivered') {
     return res.status(400).send({ message: 'Order delivered already' })
   }
@@ -109,6 +111,10 @@ async function updateStock(id, quantity) {
 }
 
 exports.deleteOrder = asyncHandler(async (req, res) => {
-  const order = await Order.findByIdAndDelete(req.params.id)
+  const order = await Order.findById(req.params.id)
+  if (!order) {
+    return res.status(404).send({ message: 'No order found' })
+  }
+  await order.deleteOne()
   res.status(200).send({ message: 'Order deleted successfully' })
 })
