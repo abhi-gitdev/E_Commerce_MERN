@@ -6,9 +6,19 @@ const Home = () => {
     <>
       <section id="home">
         <div id="homeContainer">
-          <h1>“Your Digital Shopping Destination.”</h1>
-          <button type="button">Buy Now</button>
+          <h1>
+            “Stay Stylish and Keep Sprinting Towards Your Fashion Goals With
+            StreetStyleSprint!”
+          </h1>
+          <button type="button" className="btn">
+            Buy Now
+          </button>
         </div>
+      </section>
+      <section id="category">
+        <div className="categoryCard">MEN</div>
+        <div className="categoryCard">WOMEN</div>
+        <div className="categoryCard">KID</div>
       </section>
     </>
   )
