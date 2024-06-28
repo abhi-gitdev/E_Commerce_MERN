@@ -6,16 +6,24 @@ const ApiFeature = require('../utils/apiFeatures')
 
 exports.getAllProducts = asyncHandler(async (req, res) => {
   const productsCount = await Product.countDocuments()
-  const resultPerPage = 10
+  const resultPerPage = 8
   const apiFeature = new ApiFeature(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage)
   const products = await apiFeature.query
+  if (products.length === 0) {
+    return res.status(404).json({ message: 'No products found' })
+  }
   if (!products) {
     return res.status(404).send({ message: 'No product found' })
   }
-  res.status(200).send({ products, productsCount })
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+  })
 })
 
 exports.getProduct = asyncHandler(async (req, res) => {
