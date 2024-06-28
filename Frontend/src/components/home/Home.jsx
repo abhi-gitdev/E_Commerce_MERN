@@ -3,6 +3,8 @@ import './Home.css'
 import formal2 from '../../assets/products/formal4.jpg'
 import Product from '../product/Product'
 import ShopByCategory from './ShopByCategory'
+import Metadata from '../Metadata.jsx'
+
 const product = {
   name: "Arrow Men's Rayon Single Breasted Business Casual Blazer",
   images: [
@@ -17,6 +19,7 @@ const product = {
 const Home = () => {
   return (
     <>
+      <Metadata title="StreetStyleSprint"></Metadata>
       <div id="homeDiv">
         <section id="home">
           <div id="homeContainer">

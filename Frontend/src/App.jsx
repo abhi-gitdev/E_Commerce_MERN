@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
+import { Provider } from 'react-redux'
 
 function App() {
   return (
