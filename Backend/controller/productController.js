@@ -5,15 +5,17 @@ const mongoose = require('mongoose')
 const ApiFeature = require('../utils/apiFeatures')
 
 exports.getAllProducts = asyncHandler(async (req, res) => {
+  const productsCount = await Product.countDocuments()
+  const resultPerPage = 10
   const apiFeature = new ApiFeature(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(2)
+    .pagination(resultPerPage)
   const products = await apiFeature.query
   if (!products) {
     return res.status(404).send({ message: 'No product found' })
   }
-  res.status(200).send(products)
+  res.status(200).send({ products, productsCount })
 })
 
 exports.getProduct = asyncHandler(async (req, res) => {

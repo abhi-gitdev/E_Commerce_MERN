@@ -5,7 +5,12 @@ import {
 } from '@reduxjs/toolkit'
 
 import { composeWithDevTools } from '@redux-devtools/extension'
+import { productsReducer } from './features/productSlice'
+
+const reducer = {}
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    products: productsReducer,
+  },
 })

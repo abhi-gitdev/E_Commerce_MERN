@@ -8,7 +8,7 @@ const options = {
   activeColor: 'orange',
   value: 2.5,
   isHalf: true,
-  size: 'window.innerWidth < 600 ? 20 : 25',
+  size: window.innerWidth < 1080 ? 17 : 20,
 }
 
 const Product = ({ product }) => {
