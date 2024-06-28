@@ -9,9 +9,19 @@ const Navbar = () => {
     <>
       <nav>
         <Link to={'/'} className="link">
+          <img
+            src={logo}
+            style={{
+              position: 'absolute',
+              left: '4rem',
+              top: '0rem',
+              height: '5rem',
+            }}
+            alt="Logo"
+          />
           StreetStyleSprint
         </Link>
-        <div class="navDiv" id="pageLink">
+        <div className="navDiv" id="pageLink">
           <Link to={'/'} className="link">
             Home
           </Link>
@@ -22,7 +32,7 @@ const Navbar = () => {
             About
           </Link>
         </div>
-        <div class="navDiv">
+        <div className="navDiv">
           <Link to={'/'} className="link">
             <IoIosCart style={{ fontSize: '2rem' }} />
           </Link>

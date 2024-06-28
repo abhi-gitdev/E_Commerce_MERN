@@ -22,6 +22,7 @@
   align-items: flex-start;
   height: 70vh;
   padding: 3rem;
+  position: relative;
 }
 
 #homeContainer {
@@ -56,29 +57,49 @@
 }
 
 #category {
+  text-align: center;
+  position: relative;
+  height: auto;
+  margin: 5vmax 6vmax;
+  padding-top: 5vmax;
+}
+
+#category div {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  padding: 5rem 0;
+  margin-top: 3vmax;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .categoryCard {
-  width: 15rem;
-  background-color: aliceblue;
-  height: 17rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  width: 15vmax;
+  height: 15vmax;
+  cursor: pointer;
+  margin: 1.5vmax;
   border-radius: 1rem;
   transition: all 0.3s ease-in-out;
 }
 
-.categoryCard img {
-  height: 15rem;
+.categoryCard > p {
+  font-size: 1.2vmax;
+  padding: 1vmax;
   border-radius: 1rem;
+  background-color: aliceblue;
   position: relative;
-  padding: 1rem;
-  top: -0.5rem;
+  bottom: -5vmax;
+  transition: all 0.3s ease;
+}
+
+.categoryCard img {
+  width: 15vmax;
+  position: absolute;
+  border-radius: 1rem;
+}
+
+.categoryCard p:hover {
+  color: aliceblue;
+  background-color: black;
 }
 
 .categoryCard:hover {
@@ -86,66 +107,91 @@
   transform: scale(1.05);
 }
 
-@media (max-width: 390px) {
-  #home {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  #homeContainer {
-    width: 100%;
-  }
-  #homeContainer h1 {
-    font-size: 1.5rem;
-  }
-  #home::before {
-    background: url('../../assets/hero1.png') no-repeat center center/cover;
-    content: '';
-    width: 18rem;
-    height: 18rem;
-    position: absolute;
-    top: 110%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    display: block;
-    opacity: 1;
-    border-radius: 15rem;
-    background-color: rgb(182, 187, 192);
-  }
+#featured {
+  height: auto;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-@media (min-width: 391px) and (max-width: 650px) {
-  #home {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+
+#featured > div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 6vmax;
+  /* flex-; */
+}
+
+.productCard {
+  width: 14vmax;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  border-radius: 1rem;
+  padding: 1rem 1.3rem;
+  background-color: rgb(255, 255, 255);
+  margin: 2vmax 0.6vmax;
+}
+.productCard img {
+  width: 14vmax;
+}
+.productDiv {
+  border-radius: 1rem;
+  transition: transform 0.3s ease-in-out;
+}
+.productDiv:hover {
+  transform: scale(1.02);
+}
+
+.productCard > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 0 0.5vmax 0.2vmax;
+  font-size: 1vmax;
+}
+
+.productCard > div > span {
+  padding: 0.3vmax 0.1vmax;
+}
+
+.productCard > p {
+  font-size: 1.2vmax;
+  margin: 1vmax 0.5vmax;
+  margin-bottom: 0;
+}
+
+.productCard > span {
+  margin: 0.5vmax;
+  color: brown;
+  font-size: 1.3vmax;
+}
+.productCard p:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .productCard > p {
+    font-size: 1.7vmax;
   }
-  #homeContainer {
-    width: 100%;
-  }
-  #homeContainer h1 {
-    font-size: 1.5rem;
-  }
-  #home::before {
-    background: url('../../assets/hero1.png') no-repeat center center/cover;
-    content: '';
-    width: 18rem;
-    height: 18rem;
-    position: absolute;
-    top: 95%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+  .productCard > div {
+    margin: 0vmax;
     display: block;
-    opacity: 1;
-    border-radius: 15rem;
-    background-color: rgb(182, 187, 192);
+  }
+  .productCard > div > span {
+    font-size: 1.4vmax;
+  }
+  .productCard span {
+    font-size: 1.6vmax;
   }
 }
 
-@media (min-width: 650px) and (max-width: 710px) {
+@media (max-width: 550px) {
   #home {
-    display: flex;
     justify-content: flex-start;
     align-items: center;
   }
@@ -153,22 +199,34 @@
     width: 100%;
   }
   #homeContainer h1 {
-    font-size: 1.6rem;
+    font-size: 2vmax;
   }
   #home::before {
-    background: url('../../assets/hero1.png') no-repeat center center/cover;
-    content: '';
-    width: 30rem;
-    height: 30rem;
-    position: absolute;
-    top: 110%;
+    width: 45vmax;
+    height: 45vmax;
+    top: 22rem;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
-    display: block;
-    opacity: 1;
-    border-radius: 15rem;
-    background-color: rgb(182, 187, 192);
+  }
+}
+
+@media (min-width: 550px) and (max-width: 710px) {
+  #home {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #homeContainer {
+    width: 100%;
+  }
+  #homeContainer h1 {
+    font-size: 2.2vmax;
+  }
+  #home::before {
+    width: 50vmax;
+    height: 50vmax;
+    top: 22rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -177,29 +235,22 @@
     width: 40%;
   }
   #homeContainer h1 {
-    font-size: 1.7rem;
+    font-size: 2vmax;
   }
   #home::before {
-    background: url('../../assets/hero1.png') no-repeat center center/cover;
-    content: '';
-    width: 20rem;
-    height: 20rem;
-    position: absolute;
+    width: 40vmax;
+    height: 40vmax;
     top: 50%;
-    right: -5%;
+    left: 70%;
     transform: translate(-50%, -50%);
-    z-index: -1;
-    display: block;
-    border-radius: 15rem;
-    background-color: rgb(182, 187, 192);
   }
 }
 
-@media (min-width: 1027px) and (max-width: 1274px) {
+@media (min-width: 1026px) and (max-width: 1274px) {
   #homeContainer {
     width: 45%;
   }
   #homeContainer h1 {
-    font-size: 1.8rem;
+    font-size: 2.1vmax;
   }
 }
