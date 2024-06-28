@@ -8,21 +8,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { clearErrors } from '../../features/productSlice.jsx'
 import { getProduct } from '../../actions/productActions.js'
-
-const product = {
-  name: "Arrow Men's Rayon Single Breasted Business Casual Blazer",
-  images: [
-    {
-      url: 'https://m.media-amazon.com/images/I/61Wx4ujU5wL._SX569_.jpg',
-    },
-  ],
-  price: 8500,
-  _id: 'Formal_1',
-}
+import Loader from '../loader/Loader.jsx'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { products, loading, error } = useSelector((state) => state.products)
+  const { products, loading, error, productsCount, resultPerPage } =
+    useSelector((state) => state.products)
 
   useEffect(() => {
     dispatch(getProduct())
@@ -32,7 +23,7 @@ const Home = () => {
   }, [dispatch])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   if (error) {
@@ -58,14 +49,7 @@ const Home = () => {
       <section id="featured">
         <h2>FEATURED PRODUCTS</h2>
         <div>
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
+          {products && products.map((p) => <Product product={p}></Product>)}
         </div>
       </section>
     </>

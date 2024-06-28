@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getProduct } from '../actions/productActions'
-import { act } from 'react'
 
 const initialProductsState = {
   products: [],
   loading: false,
   error: null,
   productsCount: 0,
-  resultPerPage: 10,
+  resultPerPage: 8,
   filteredProductsCount: 0,
 }
 
@@ -28,11 +27,9 @@ const productsSlice = createSlice({
       })
       .addCase(getProduct.fulfilled, (state, action) => {
         state.loading = false
-        console.log(action)
         state.products = action.payload.products
         state.productsCount = action.payload.productsCount
         state.resultPerPage = action.payload.resultPerPage
-        state.filteredProductsCount = action.payload.filteredProductsCount
       })
       .addCase(getProduct.rejected, (state, action) => {
         state.loading = false
