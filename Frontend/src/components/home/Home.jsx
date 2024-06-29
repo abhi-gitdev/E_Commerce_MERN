@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { clearErrors } from '../../features/productSlice.jsx'
 import { getProduct } from '../../actions/productActions.js'
 import Loader from '../loader/Loader.jsx'
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -16,11 +17,15 @@ const Home = () => {
     useSelector((state) => state.products)
 
   useEffect(() => {
-    dispatch(getProduct())
-    return () => {
-      dispatch(clearErrors()) // Clear errors when component unmounts
+    if (error) {
+      toast.error(error)
     }
-  }, [dispatch])
+    dispatch(getProduct())
+
+    return () => {
+      dispatch(clearErrors())
+    }
+  }, [dispatch, error])
 
   if (loading) {
     return <Loader />

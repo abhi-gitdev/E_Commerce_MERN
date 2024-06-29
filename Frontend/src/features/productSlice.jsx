@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getProduct } from '../actions/productActions'
+import { getProduct, getProductDetails } from '../actions/productActions'
 
 const initialProductsState = {
   products: [],
@@ -7,8 +7,9 @@ const initialProductsState = {
   error: null,
   productsCount: 0,
   resultPerPage: 8,
-  filteredProductsCount: 0,
 }
+
+const initialProductState = { loading: false, error: null, product: {} }
 
 const productsSlice = createSlice({
   name: 'products',
@@ -32,6 +33,32 @@ const productsSlice = createSlice({
         state.resultPerPage = action.payload.resultPerPage
       })
       .addCase(getProduct.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+  },
+})
+
+const productSlice = createSlice({
+  name: 'product',
+  initialState: initialProductState,
+  reducers: {
+    clearErrors: (state) => {
+      state.error = null
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getProductDetails.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(getProductDetails.fulfilled, (state, action) => {
+        state.loading = false
+        state.error = null
+        state.product = action.payload
+      })
+      .addCase(getProductDetails.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
       })
