@@ -19,7 +19,7 @@ const Product = ({ product }) => {
   useEffect(() => {
     dispatch(getProductDetails(product._id))
     return () => {
-      dispatch(clearErrors)
+      dispatch(clearErrors())
     }
   }, [dispatch])
   return (

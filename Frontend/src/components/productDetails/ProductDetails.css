@@ -1,0 +1,34 @@
+.carouselImage {
+  height: 35vmax;
+  width: 15vmax;
+}
+
+.imageDiv {
+  width: 25vmax;
+  height: 35vmax;
+  display: flex;
+}
+.carousel {
+  display: flex;
+  flex: 1;
+}
+
+.carousel .slider-wrapper {
+  flex: 1;
+  order: 2; /* Make the main carousel content appear second */
+}
+
+.carousel .thumbs-wrapper {
+  order: 1; /* Make the thumbnails appear first */
+  width: 100px; /* Adjust the width as needed */
+}
+
+.carousel .thumb {
+  width: 80px; /* Change this value to your desired width */
+  height: auto; /* Adjust height if needed */
+}
+
+.carousel .thumb img {
+  height: auto; /* Maintain aspect ratio */
+  width: 100%; /* Adjust the width to fit the thumbnail container */
+}
