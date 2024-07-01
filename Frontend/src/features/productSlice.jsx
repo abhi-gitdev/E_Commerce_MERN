@@ -39,7 +39,7 @@ const productsSlice = createSlice({
   },
 })
 
-const productSlice = createSlice({
+const productDetailsSlice = createSlice({
   name: 'product',
   initialState: initialProductState,
   reducers: {
@@ -55,7 +55,7 @@ const productSlice = createSlice({
       })
       .addCase(getProductDetails.fulfilled, (state, action) => {
         state.loading = false
-        state.error = null
+        console.log(action.payload)
         state.product = action.payload
       })
       .addCase(getProductDetails.rejected, (state, action) => {
@@ -67,3 +67,4 @@ const productSlice = createSlice({
 
 export const { clearErrors } = productsSlice.actions
 export const productsReducer = productsSlice.reducer
+export const productDetailsReducer = productDetailsSlice.reducer

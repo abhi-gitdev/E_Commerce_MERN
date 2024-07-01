@@ -12,9 +12,10 @@ export const getProduct = createAsyncThunk('products/getProduct', async () => {
 
 export const getProductDetails = createAsyncThunk(
   '/product/getProductDetails',
-  async () => {
+  async (id) => {
     try {
-      const response = await axios('/api/products/:id')
+      const response = await axios.get(`/api/products/:${id}`)
+      console.log(response)
       return response.data
     } catch (error) {
       return Promise.reject(error.message)
