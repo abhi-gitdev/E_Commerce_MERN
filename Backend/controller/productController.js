@@ -32,7 +32,7 @@ exports.getProduct = asyncHandler(async (req, res) => {
   if (!product) {
     return res.status(404).send({ message: 'No product found' })
   }
-  res.status(200).send(product)
+  res.status(200).json(product)
 })
 
 exports.createProduct = asyncHandler(async (req, res) => {

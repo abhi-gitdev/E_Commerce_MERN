@@ -1,34 +1,53 @@
-.carouselImage {
-  height: 35vmax;
-  width: 15vmax;
+.productDetails {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imageDiv {
-  width: 25vmax;
-  height: 35vmax;
   display: flex;
-}
-.carousel {
-  display: flex;
-  flex: 1;
-}
-
-.carousel .slider-wrapper {
-  flex: 1;
-  order: 2; /* Make the main carousel content appear second */
+  justify-content: center;
+  align-items: center;
+  width: 30vmax;
+  position: relative;
+  margin: 0 auto;
 }
 
-.carousel .thumbs-wrapper {
-  order: 1; /* Make the thumbnails appear first */
-  width: 100px; /* Adjust the width as needed */
+.slide {
+  border-radius: 0.4rem;
+  box-shadow: 0px 0px 7px rgb(78, 78, 78);
+  width: 100%;
+  height: 100%;
+  -webkit-user-drag: none; /* Prevent dragging in Safari and Chrome */
+  pointer-events: none; /* Disable all mouse events */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard syntax */
+  display: block;
 }
-
-.carousel .thumb {
-  width: 80px; /* Change this value to your desired width */
-  height: auto; /* Adjust height if needed */
+.slide.slide-hidden {
+  display: none;
 }
-
-.carousel .thumb img {
-  height: auto; /* Maintain aspect ratio */
-  width: 100%; /* Adjust the width to fit the thumbnail container */
+.left-arrow {
+  position: absolute;
+  left: 0;
+  font-size: 2.8vmax;
+  background-color: rgba(135, 135, 135, 0.3);
+  padding: 1vmax;
+  border-radius: 1.5rem;
+}
+.right-arrow {
+  position: absolute;
+  right: 0;
+  font-size: 2.8vmax;
+  background-color: rgba(135, 135, 135, 0.3);
+  padding: 1vmax;
+  border-radius: 1.5rem;
+}
+.left-arrow:hover,
+.right-arrow:hover {
+  background-color: rgba(135, 135, 135, 0.5);
+  cursor: pointer;
 }

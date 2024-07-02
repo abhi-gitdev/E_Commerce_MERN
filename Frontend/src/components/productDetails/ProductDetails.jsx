@@ -1,13 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getProductDetails } from '../../actions/productActions'
 import { clearErrors } from '../../features/productSlice'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Carousel } from 'react-responsive-carousel'
 import './ProductDetails.css'
-
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import Carousel from 'react-material-ui-carousel'
 const ProductDetails = () => {
   const params = useParams()
   const dispatch = useDispatch()
@@ -24,22 +23,34 @@ const ProductDetails = () => {
     }
   }, [dispatch, error, params.id])
 
+  const [slide, setSlide] = useState(0)
+  const nextSlide = () => {
+    setSlide(slide === product.images.length - 1 ? 0 : slide + 1)
+  }
+  const previousSlide = () => {
+    setSlide(slide === 0 ? product.images.length - 1 : slide - 1)
+  }
   return (
-    <div className="imageDiv">
-      <Carousel showThumbs={true}>
-        {product.images &&
-          product.images.map((item, id) => (
-            <div>
+    <>
+      <div className="productDetails">
+        <div className="imageDiv">
+          {/* <Carousel> */}
+          <FaArrowLeft className="left-arrow" onClick={previousSlide} />
+          {product.images &&
+            product.images.map((item, id) => (
               <img
                 src={item.url}
-                key={item.url}
+                key={id}
                 alt={product.name}
-                className="carouselImage"
+                className={slide === id ? 'slide' : 'slide slide-hidden'}
               />
-            </div>
-          ))}
-      </Carousel>
-    </div>
+            ))}
+          <FaArrowRight className="right-arrow" onClick={nextSlide} />
+          {/* </Carousel> */}
+        </div>
+        <div>kjkj</div>
+      </div>
+    </>
   )
 }
 
