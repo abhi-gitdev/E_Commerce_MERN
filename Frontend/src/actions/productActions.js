@@ -14,10 +14,11 @@ export const getProductDetails = createAsyncThunk(
   '/product/getProductDetails',
   async (id) => {
     try {
-      const response = await axios.get(`/api/products/${id}`)
-      console.log(response)
+      const response = await axios.get(`/api/products/product/${id}`)
+      console.log('Product Details Response:', response) // Log response for debugging
       return response.data
     } catch (error) {
+      console.error('Error fetching product details:', error.message) // Log error for debugging
       return Promise.reject(error.message)
     }
   }

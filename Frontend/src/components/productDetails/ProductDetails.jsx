@@ -7,6 +7,7 @@ import { clearErrors } from '../../features/productSlice'
 import './ProductDetails.css'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Carousel from 'react-material-ui-carousel'
+import { Link } from 'react-router-dom'
 const ProductDetails = () => {
   const params = useParams()
   const dispatch = useDispatch()
@@ -23,34 +24,71 @@ const ProductDetails = () => {
     }
   }, [dispatch, error, params.id])
 
+  // console.log(product)
   const [slide, setSlide] = useState(0)
-  const nextSlide = () => {
-    setSlide(slide === product.images.length - 1 ? 0 : slide + 1)
-  }
-  const previousSlide = () => {
-    setSlide(slide === 0 ? product.images.length - 1 : slide - 1)
-  }
   return (
-    <>
-      <div className="productDetails">
-        <div className="imageDiv">
-          {/* <Carousel> */}
-          <FaArrowLeft className="left-arrow" onClick={previousSlide} />
-          {product.images &&
-            product.images.map((item, id) => (
-              <img
-                src={item.url}
-                key={id}
-                alt={product.name}
-                className={slide === id ? 'slide' : 'slide slide-hidden'}
-              />
-            ))}
-          <FaArrowRight className="right-arrow" onClick={nextSlide} />
-          {/* </Carousel> */}
-        </div>
-        <div>kjkj</div>
+    <section className="productPage">
+      <div className="path">
+        <Link to="/">Home</Link>
+        <span> / </span>
+        <Link to="/catalog">Catalog</Link>
+        <span> / </span>
+        <Link to={`/product/${product._id}`}>{product.name}</Link>
       </div>
-    </>
+      <div className="productDetails">
+        <div className="productImg">
+          <div className="thumb">
+            {product.images &&
+              product.images.map((item, id) => (
+                <img
+                  src={item.url}
+                  key={id}
+                  alt={product.name}
+                  onClick={() => setSlide(id)}
+                />
+              ))}
+          </div>
+          <div className="imageDiv">
+            {product.images &&
+              product.images.map((item, id) => (
+                <img
+                  src={item.url}
+                  key={id}
+                  alt={product.name}
+                  className={slide === id ? 'slide' : 'slide slide-hidden'}
+                />
+              ))}
+          </div>
+        </div>
+        <div className="content">
+          <div className="info">
+            <h3>{product.name}</h3>
+            <hr />
+            <p>₹{product.price}</p>
+            <p>Product Details</p>
+            <p>
+              Product Dimensions (LxWxH ):
+              {product.productDetail.ProductDimensions}
+            </p>
+            <p>Item Weight: {product.productDetail.ItemWeight}</p>
+            <p>Department: {product.productDetail.Department}</p>
+            <p>Manufacturer: {product.productDetail.Manufacturer}</p>
+            <p>
+              Manufacturer Address: {product.productDetail.ManufacturerAddress}
+            </p>
+            <p>Country of Origin: {product.productDetail.CountryOfOrigin}</p>
+
+            <p>Packer: {product.productDetail.Packer}</p>
+            <p>Generic Name: {product.productDetail.GenericName}</p>
+          </div>
+          <div className="buyBox">
+            <p>₹{product.price}</p>
+            <button type="button">Buy Now</button>
+            <button type="button">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

@@ -28,7 +28,7 @@ router
   .delete(isUserAuthenticated, deleteReview)
 
 router
-  .route('/:id')
+  .route('product/:id')
   .get(getProduct)
   .put(isUserAuthenticated, isUserAuthorized('admin'), updateProduct)
   .delete(isUserAuthenticated, isUserAuthorized('admin'), deleteProduct)

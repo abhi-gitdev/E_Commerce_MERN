@@ -1,8 +1,25 @@
 .productDetails {
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.path {
+  margin: 3vmax 0 1vmax 4vmax;
+}
+
+.path a {
+  text-decoration: none;
+  color: rgb(99, 99, 99);
+}
+
+.path a:hover {
+  text-decoration: underline;
 }
 
 .imageDiv {
@@ -10,44 +27,74 @@
   justify-content: center;
   align-items: center;
   width: 30vmax;
-  position: relative;
   margin: 0 auto;
 }
 
-.slide {
+.slide,
+.thumb img {
   border-radius: 0.4rem;
   box-shadow: 0px 0px 7px rgb(78, 78, 78);
   width: 100%;
   height: 100%;
-  -webkit-user-drag: none; /* Prevent dragging in Safari and Chrome */
-  pointer-events: none; /* Disable all mouse events */
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard syntax */
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   display: block;
+  transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
+}
+
+.slide:hover {
+  transform: scale(1.3);
+  cursor: zoom-in;
 }
 .slide.slide-hidden {
   display: none;
 }
-.left-arrow {
-  position: absolute;
-  left: 0;
-  font-size: 2.8vmax;
-  background-color: rgba(135, 135, 135, 0.3);
-  padding: 1vmax;
-  border-radius: 1.5rem;
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.right-arrow {
-  position: absolute;
-  right: 0;
-  font-size: 2.8vmax;
-  background-color: rgba(135, 135, 135, 0.3);
-  padding: 1vmax;
-  border-radius: 1.5rem;
-}
-.left-arrow:hover,
-.right-arrow:hover {
-  background-color: rgba(135, 135, 135, 0.5);
+
+.thumb img {
+  width: 6vmax;
+  margin: 1vmax;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.thumb img:hover {
+  border: 2px solid black;
+  transform: translateY(-0.5rem);
+  box-sizing: border-box;
+}
+
+.productImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  margin: 1vmax 1vmax;
+}
+.imageDiv:hover .arrow {
+  display: none;
+}
+
+@media (min-width: 1025px) {
+  .productImg {
+    width: 28rem;
+  }
+  .thumb img {
+    width: 4.5vmax;
+  }
+}
+
+.buyBox {
+  width: 15rem;
+  border: 1px solid rgb(176, 176, 176);
+  height: 30vmax;
 }
