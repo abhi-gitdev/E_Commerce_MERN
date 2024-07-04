@@ -109,7 +109,7 @@
 
 #featured {
   height: auto;
-  margin: 1rem;
+  margin: 2vmax;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,11 +118,14 @@
 
 #featured > div {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin: 0 6vmax;
+  flex: 1 1 22%;
   /* flex-; */
+}
+#featured > div > * {
+  flex: 1 1 22%;
 }
 
 .productCard {
@@ -132,7 +135,7 @@
   text-decoration: none;
   color: black;
   border-radius: 1rem;
-  padding: 1rem 1.3rem;
+  padding: 1.1vmax 1.5vmax;
   background-color: rgb(255, 255, 255);
   margin: 2vmax 0.6vmax;
 }
@@ -140,6 +143,9 @@
   width: 14vmax;
 }
 .productDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 1rem;
   transition: transform 0.3s ease-in-out;
 }

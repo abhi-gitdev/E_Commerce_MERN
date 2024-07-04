@@ -150,17 +150,19 @@ const ProductDetails = () => {
             <h3>Product Description</h3>
             <p>{product.description}</p>
           </div>
-          <div className="reviews">
+          <div className="revDiv">
             <h3>Reviews</h3>
-            {product.reviews && product.reviews[0] ? (
-              <div className="review">
-                {product.reviews.map((review) => (
-                  <ReviewCard review={review} />
-                ))}
-              </div>
-            ) : (
-              <p>No Reviews Yet</p>
-            )}
+            <div className="reviews">
+              {product.reviews && product.reviews[0] ? (
+                <div className="review">
+                  {product.reviews.map((review) => (
+                    <ReviewCard review={review} />
+                  ))}
+                </div>
+              ) : (
+                <p>No Reviews Yet</p>
+              )}
+            </div>
           </div>
         </section>
       )}
