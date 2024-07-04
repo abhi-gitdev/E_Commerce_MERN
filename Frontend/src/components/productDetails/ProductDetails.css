@@ -193,3 +193,24 @@
     width: 100%;
   }
 }
+
+.reviews,
+.description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vmax;
+}
+
+.reviews h3,
+.description h3 {
+  font-family: 'Wittgenstein', serif;
+  font-size: 1.5vmax;
+}
+
+.reviews > p,
+.description p {
+  font-size: 1.2vmax;
+  margin: 1vmax;
+}
