@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ReactStars from 'react-rating-stars-component'
+import { Rating } from '@mui/lab'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails } from '../../actions/productActions'
 import { toast } from 'react-toastify'
@@ -8,13 +9,11 @@ import { clearErrors } from '../../features/productSlice'
 
 const Product = ({ product }) => {
   const dispatch = useDispatch()
+
   const options = {
-    edit: false,
-    color: 'rgba(20, 20, 20, 0.3)',
-    activeColor: 'orange',
-    value: `${product.rating}`,
-    isHalf: true,
-    size: window.innerWidth < 1080 ? 17 : 20,
+    value: product.rating,
+    readOnly: true,
+    precision: 0.5,
   }
   useEffect(() => {
     dispatch(getProductDetails(product._id))
@@ -28,8 +27,7 @@ const Product = ({ product }) => {
         <img src={product.images[0].url} alt={product.name} />
         <p>{product.name}</p>
         <div>
-          <ReactStars {...options} />
-          <span>({product.numOfReviews} Reviews)</span>
+          <Rating {...options} /> <span>({product.numOfReviews} Reviews)</span>
         </div>
         <span>₹{product.price}</span>
       </Link>

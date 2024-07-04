@@ -1,6 +1,17 @@
-body {
+* {
   padding: 0;
   margin: 0;
   /* background-color: #e6f7ff; */
+}
+body {
   background-color: #f2e3d6;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
 }

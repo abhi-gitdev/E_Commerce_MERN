@@ -14,6 +14,8 @@ export const getProductDetails = createAsyncThunk(
   '/product/getProductDetails',
   async (id) => {
     try {
+      console.log(id)
+      console.log('iyfu')
       const response = await axios.get(`/api/products/product/${id}`)
       console.log('Product Details Response:', response) // Log response for debugging
       return response.data

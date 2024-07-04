@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import './Home.css'
-import formal2 from '../../assets/products/formal4.jpg'
 import Product from '../product/Product'
 import ShopByCategory from './ShopByCategory'
 import Metadata from '../Metadata.jsx'
@@ -53,7 +52,8 @@ const Home = () => {
       <section id="featured">
         <h2>FEATURED PRODUCTS</h2>
         <div>
-          {products && products.map((p) => <Product product={p}></Product>)}
+          {products &&
+            products.map((p) => <Product key={p._id} product={p}></Product>)}
         </div>
       </section>
     </>
