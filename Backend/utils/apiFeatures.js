@@ -28,7 +28,7 @@ class ApiFeature {
   }
 
   pagination(resultPerPage) {
-    const currPage = this.queryStr.page
+    const currPage = Number(this.queryStr.page) || 1
     const skip = resultPerPage * (currPage - 1)
     this.query = this.query.limit(resultPerPage).skip(skip)
     return this

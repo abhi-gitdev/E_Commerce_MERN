@@ -3,9 +3,10 @@ import axios from 'axios'
 
 export const getProduct = createAsyncThunk(
   'products/getProduct',
-  async (keyword = '') => {
+  async ({ keyword = '', currentPage = 1 }) => {
     try {
-      let link = `/api/products?keyword=${keyword}`
+      console.log(keyword, currentPage)
+      let link = `/api/products/products?keyword=${keyword}&page=${currentPage}`
       const response = await axios.get(link)
       return response.data
     } catch (error) {

@@ -16,7 +16,7 @@ const {
 } = require('../utils/isUserAuthenticated')
 
 router
-  .route('/')
+  .route('/products')
   .get(getAllProducts)
   .post(isUserAuthenticated, isUserAuthorized('admin'), createProduct)
 
