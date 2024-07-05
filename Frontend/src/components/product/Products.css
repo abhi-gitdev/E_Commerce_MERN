@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
+
+.catalogHeading {
+  margin: 2vmax auto;
+  width: fit-content;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1.2vmax;
+  font-size: 1.8vmax;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Bona Nova SC', serif;
+}
+.productCards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.productCards > * {
+  flex: 1 1 22%;
+}

@@ -4,7 +4,8 @@ import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
 import Loader from './components/loader/Loader'
 import ProductDetails from './components/productDetails/ProductDetails'
-
+import Products from './components/product/Products'
+import Search from './components/product/Search'
 function App() {
   return (
     <Router>
@@ -12,6 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/products/:keyword" element={<Products />} />
+        <Route path="/catalog" element={<Products />}></Route>
+        <Route path="/search" element={<Search />}></Route>
       </Routes>
       <Footer />
     </Router>

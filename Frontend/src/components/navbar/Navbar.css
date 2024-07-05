@@ -21,9 +21,39 @@ nav {
 .link {
   text-decoration: none;
   color: black;
+  font-size: 1.1vmax;
   font-family: 'Montserrat', sans-serif;
 }
 
 .link:hover {
   text-decoration: underline;
+}
+
+.searchIcon {
+  font-size: 2vmax;
+  transition: all 0.5s ease-in-out;
+}
+
+.searchBtn {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.searchBtn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.searchBar {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.searchBar.visible {
+  max-height: 100px; /* Adjust as needed */
+  opacity: 1;
 }
