@@ -5,7 +5,7 @@ export const getProduct = createAsyncThunk(
   'products/getProduct',
   async (keyword = '') => {
     try {
-      let link = `/api/products?keyword=${keyword}`
+      let link = `/api/products/products?keyword=${keyword}`
       const response = await axios.get(link)
       return response.data
     } catch (error) {

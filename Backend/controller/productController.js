@@ -4,36 +4,44 @@ const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 const ApiFeature = require('../utils/apiFeatures')
 
-exports.getAllProducts = asyncHandler(async (req, res) => {
-  const productsCount = await Product.countDocuments()
-  const resultPerPage = 8
-  const apiFeature = new ApiFeature(Product.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resultPerPage)
-  const products = await apiFeature.query
-  if (products.length === 0) {
-    return res.status(404).json({ message: 'No products found' })
+exports.getAllProducts = async (req, res) => {
+  try {
+    const productsCount = await Product.countDocuments()
+    const resultPerPage = 8
+    const apiFeature = new ApiFeature(Product.find(), req.query)
+      .search()
+      .filter()
+      .pagination(resultPerPage)
+    const products = await apiFeature.query
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'No products found' })
+    }
+    if (!products) {
+      return res.status(404).send({ message: 'No product found' })
+    }
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+    })
+  } catch (err) {
+    return res.status(500).send({ message: err._message })
   }
-  if (!products) {
-    return res.status(404).send({ message: 'No product found' })
-  }
-  res.status(200).json({
-    success: true,
-    products,
-    productsCount,
-    resultPerPage,
-  })
-})
+}
 
-exports.getProduct = asyncHandler(async (req, res) => {
-  const id = req.params.id
-  const product = await Product.findById(id)
-  if (!product) {
-    return res.status(404).send({ message: 'No product found' })
+exports.getProduct = async (req, res) => {
+  try {
+    const id = req.params.id
+    const product = await Product.findById(id)
+    if (!product) {
+      return res.status(404).send({ message: 'No product found' })
+    }
+    res.status(200).json(product)
+  } catch (err) {
+    return res.status(500).send({ message: err._message })
   }
-  res.status(200).json(product)
-})
+}
 
 exports.createProduct = asyncHandler(async (req, res) => {
   req.body.user = req.user.id
