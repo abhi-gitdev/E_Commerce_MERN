@@ -3,25 +3,29 @@ import axios from 'axios'
 
 export const getProduct = createAsyncThunk(
   'products/getProduct',
-  async (keyword = '') => {
+  async (keyword = '', { rejectWithValue }) => {
     try {
+      console.log(keyword)
       let link = `/api/products/products?keyword=${keyword}`
       const response = await axios.get(link)
       return response.data
     } catch (error) {
-      return Promise.reject(error.message)
+      console.log(error)
+      keyword = ''
+      console.log('error')
+      return rejectWithValue(error.response.data.message)
     }
   }
 )
 
 export const getProductDetails = createAsyncThunk(
   '/product/getProductDetails',
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(`/api/products/product/${id}`)
       return response.data
     } catch (error) {
-      return Promise.reject(error.message)
+      return rejectWithValue(error.message)
     }
   }
 )

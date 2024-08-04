@@ -1,15 +1,20 @@
-import logo from '../../assets/logo.png'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './Navbar.css'
 import { IoIosCart } from 'react-icons/io'
 import { CgProfile } from 'react-icons/cg'
 import { IoSearchOutline } from 'react-icons/io5'
-import { useState } from 'react'
-import Search from '../product/Search'
 import { RxCross2 } from 'react-icons/rx'
+import logo from '../../assets/logo.png'
+import './Navbar.css'
+import Search from '../product/Search'
 
 const Navbar = () => {
-  const [search, setSearch] = useState(false)
+  const [searchVisible, setSearchVisible] = useState(false)
+
+  const toggleSearch = () => {
+    setSearchVisible((prev) => !prev)
+  }
+
   return (
     <>
       <nav>
@@ -30,7 +35,7 @@ const Navbar = () => {
           <Link to={'/'} className="link">
             Home
           </Link>
-          <Link to={'/catalog'} className="link">
+          <Link to={'/products'} className="link">
             Catalog
           </Link>
           <Link to={'/'} className="link">
@@ -38,12 +43,8 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navDiv">
-          <button
-            type="button"
-            className="searchBtn"
-            onClick={() => setSearch(!search)}
-          >
-            {search ? (
+          <button type="button" className="searchBtn" onClick={toggleSearch}>
+            {searchVisible ? (
               <RxCross2 className="searchIcon" />
             ) : (
               <IoSearchOutline className="searchIcon" />
@@ -57,8 +58,8 @@ const Navbar = () => {
           </Link>
         </div>
       </nav>
-      <div className={`searchBar ${search ? 'visible' : ''}`}>
-        {search && <Search />}
+      <div className={`searchBar ${searchVisible ? 'visible' : ''}`}>
+        {searchVisible && <Search />}
       </div>
     </>
   )
