@@ -17,13 +17,14 @@ const Products = () => {
   console.log(keyword)
   const navigate = useNavigate()
 
-  // const [keyword, setKeyword] = useState('')
   const { loading, error, products, productsCount, resultPerPage } =
     useSelector((state) => state.products)
+
   useEffect(() => {
     dispatch(getProduct(keyword))
     keyword = ''
   }, [dispatch, keyword])
+
   useEffect(() => {
     if (error) {
       navigate('/products')
@@ -31,10 +32,7 @@ const Products = () => {
       dispatch(clearErrors())
     }
   }, [dispatch, error])
-  // const handleSearchSubmit = (e) => {
-  //   e.preventDefault()
-  //   dispatch(getProduct(keyword))
-  // }
+
   return (
     <>
       {loading ? (
@@ -42,16 +40,6 @@ const Products = () => {
       ) : (
         <section className="catalog">
           <h3 className="catalogHeading">Catalog</h3>
-          {/* <form className="searchBox" onSubmit={handleSearchSubmit}>
-            <input
-              type="text"
-              placeholder="Search here..."
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button type="submit" className="searchSbmt">
-              <IoSearchOutline className="searchSbmtIcon" />
-            </button>
-          </form> */}
           <div className="catalogBody">
             <div className="filters"></div>
             <div className="productCards">
