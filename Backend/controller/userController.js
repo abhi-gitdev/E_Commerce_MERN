@@ -39,7 +39,9 @@ exports.registerUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
   })
-  res.status(200).send({ message: 'Registered successfully' })
+  res
+    .status(200)
+    .json(new ApiResponse(200, newUser, 'Registered successfully!'))
 })
 
 exports.loginUser = asyncHandler(async (req, res) => {

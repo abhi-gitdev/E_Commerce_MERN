@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Rating } from '@mui/lab'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails } from '../../actions/productActions'
 import { toast } from 'react-toastify'

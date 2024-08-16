@@ -9,21 +9,24 @@ import './Products.css'
 import './Search.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom'
-
 import { useParams } from 'react-router-dom'
+import Pagination from '@mui/material/Pagination'
+import Stack from '@mui/material/Stack'
+
 const Products = () => {
   const dispatch = useDispatch()
-  let keyword = useParams().keyword
-  console.log(keyword)
+  const params = useParams()
+  let keyword = para.keyword
   const navigate = useNavigate()
 
   const { loading, error, products, productsCount, resultPerPage } =
     useSelector((state) => state.products)
 
+  const [currentPage, setCurrentPage] = useState(1)
+
   useEffect(() => {
-    dispatch(getProduct(keyword))
-    keyword = ''
-  }, [dispatch, keyword])
+    dispatch(getProduct(keyword, currentPage))
+  }, [dispatch, keyword, currentPage])
 
   useEffect(() => {
     if (error) {
@@ -32,6 +35,12 @@ const Products = () => {
       dispatch(clearErrors())
     }
   }, [dispatch, error])
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value)
+  }
+
+  const totalPages = Math.ceil(productsCount / resultPerPage)
 
   return (
     <>
@@ -50,6 +59,15 @@ const Products = () => {
               )}
             </div>
           </div>
+          <Stack spacing={2} alignItems="center" className="pagination">
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              variant="outlined"
+              color="standard"
+            />
+          </Stack>
         </section>
       )}
     </>
