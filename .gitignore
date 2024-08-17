@@ -3,3 +3,5 @@
 
 # Ignore the node_modules directory in the backend directory
 /backend/node_modules/
+
+/frontend/node_modules/
