@@ -4,15 +4,22 @@ import connectDB from './config/connectDB.js'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 import userRoutes from './routes/userRoutes.js'
+import cors from 'cors'
 
 configDotenv()
 connectDB()
 
 const app = express()
+app.use(cookieParser())
 const port = process.env.PORT || 5001
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  })
+)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
 
 app.use('/api/users', userRoutes)
 

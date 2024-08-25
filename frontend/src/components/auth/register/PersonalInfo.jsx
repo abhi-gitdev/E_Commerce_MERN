@@ -50,7 +50,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         <RiLockPasswordFill className="icon stick" />
 
         <input
-          type="text"
+          type="password"
           name="password"
           onChange={handleChange}
           value={formData.password}

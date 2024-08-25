@@ -30,6 +30,9 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 
 export const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
+  console.log(user)
+  // console.log(req.body)
+
   if (user) {
     user.firstName = req.body.firstName
     user.lastName = req.body.lastName
@@ -43,6 +46,8 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password
     }
     const updatedUser = await user.save()
+    // console.log(updatedUser)
+
     res.status(200).json({
       firstName: updatedUser.firstName,
       lastName: updatedUser.lastName,
@@ -154,6 +159,7 @@ export const createUser = asyncHandler(async (req, res) => {
       city,
       state,
       password,
+      avatar,
     })
   } catch (err) {
     res.status(400)
@@ -170,9 +176,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     createToken(res, user._id)
-    res.status(200).json({
-      user,
-    })
+    res.status(200).json(user)
     return
   } else res.status(400).send({ message: 'Email or Password is invalid' })
 })
@@ -181,6 +185,9 @@ export const logoutUser = asyncHandler(async (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,
     expires: new Date(0),
+    sameSite: 'None',
+    secure: true,
   })
+
   res.status(200).json({ message: 'Logout successfully!' })
 })

@@ -1,0 +1,179 @@
+/* Tables.css */
+
+/* General Container */
+.getUsers {
+  margin: 2rem auto;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search and Pagination Container */
+.containerSearchAndPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Search Input */
+.searchExport .search {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.searchExport .search:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Pagination Container */
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationContainer button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paginationContainer button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginationContainer button:not(:disabled):hover {
+  background-color: #0056b3;
+}
+
+.paginationContainer span {
+  font-size: 1rem;
+  color: #333;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+thead {
+  color: white;
+  width: 100%;
+}
+
+thead tr {
+  background-color: #333e4a;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+}
+
+th {
+  position: relative;
+}
+
+.sortIcon {
+  margin-left: 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+tbody tr {
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #ccc;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+td {
+  align-items: center;
+}
+
+.link2 {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link2:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  right: 100px;
+}
+
+.opt {
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 20px;
+}
+
+.opt:hover {
+  color: #0056b3;
+}
+
+/* Status Classes
+.completed {
+  color: green;
+}
+
+.overdue {
+  color: red;
+}
+
+.pending {
+  color: orange;
+} */
+
+@media (max-width: 768px) {
+  .containerSearchAndPage {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .paginationContainer {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .options {
+    padding: 0.5rem;
+    justify-content: center;
+  }
+}

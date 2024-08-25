@@ -5,14 +5,22 @@ nav {
   width: 100%;
   background-color: rgb(239, 239, 238);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  top: 0;
+  /* left: 0; */
 }
 
 nav ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 70px;
 }
-
+.dropdown ul {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
@@ -34,21 +42,41 @@ nav ul li {
   list-style: none;
 }
 
-nav ul li a {
+nav ul li a,
+.dropdown ul li a {
   text-decoration: none;
-  color: black;
+  color: rgb(105, 99, 99);
   font-size: 1.1rem;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
   padding: 0.2rem 0.5rem;
   border-radius: 1rem;
   transition: all 0.3s ease-in-out;
+  font-weight: 550;
 }
 
-.linkContainer a:hover {
+.linkContainer {
+  width: 40%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.linkContainer a:hover,
+.dropdown ul li a:hover {
   text-decoration: underline;
 }
 
-.cartContainer a:hover {
-  background-color: black;
-  color: white;
+.login {
+  font-size: 0.8rem;
+}
+.login:hover {
+  text-decoration: underline;
+}
+.profile-img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline;
+  color: black;
 }

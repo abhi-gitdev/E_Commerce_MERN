@@ -18,16 +18,15 @@ router
   .get(authenticate, getUserProfile)
   .put(authenticate, updateUserProfile)
 
-router.route('/').get(authenticate, authorized, getAllUsers)
+router.route('/register').post(createUser)
+router.route('/auth').post(loginUser)
+router.route('/logout').post(logoutUser)
+router.route('/users-list').get(authenticate, authorized, getAllUsers)
 
 router
   .route('/:id')
   .delete(authenticate, authorized, deleteUser)
   .get(authenticate, authorized, getUserById)
   .post(authenticate, authorized, updateUserById)
-
-router.route('/register').post(createUser)
-router.route('/auth').post(loginUser)
-router.route('/logout').post(logoutUser)
 
 export default router
