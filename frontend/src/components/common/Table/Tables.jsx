@@ -10,12 +10,13 @@ import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import './Tables.css'
 
-const Tables = ({ columns, rows, name, update }) => {
+const Tables = ({ columns, rows, name, update, deleteUser }) => {
   const [keyword, setKeyword] = useState('')
   const tableRef = useRef(null)
   const dispatch = useDispatch()
   console.log(columns)
   console.log(rows)
+  const [editableUserId, setEditableUserId] = useState(false)
 
   const filteredRows = useMemo(() => {
     return rows.filter((row) =>
@@ -48,7 +49,7 @@ const Tables = ({ columns, rows, name, update }) => {
 
   return (
     <>
-      <section className="getUsers" style={{ width: '90%' }}>
+      <section className="getUsers">
         <div className="containerSearchAndPage">
           <div className="searchExport">
             <input
@@ -109,6 +110,7 @@ const Tables = ({ columns, rows, name, update }) => {
                       </div>
                     </th>
                   ))}
+                  <th></th>
                 </tr>
               ))}
             </thead>
@@ -117,27 +119,23 @@ const Tables = ({ columns, rows, name, update }) => {
                 prepareRow(row)
                 return (
                   <tr {...row.getRowProps()} className="row">
+                    {console.log(row)}
                     {row.cells.map((cell, i) => {
                       const cellProps = cell.getCellProps()
                       return (
                         <td key={i} {...cellProps}>
-                          <Link
-                            to={`/myProject/${row.cells[1].value}`}
-                            className="link2"
-                          >
-                            {cell.render('Cell')}
-                          </Link>
+                          {cell.render('Cell')}
                         </td>
                       )
                     })}
-                    <div className="options">
+                    <td className="options">
                       <Link>
                         <FiEdit2 className="opt" />
                       </Link>
                       <>
                         <RiDeleteBinLine className="opt" />
                       </>
-                    </div>
+                    </td>
                   </tr>
                 )
               })}

@@ -2,77 +2,121 @@ import React, { useState } from 'react'
 import { IoBagOutline } from 'react-icons/io5'
 import { Link, NavLink, useNavigate } from 'react-router-dom' // Use NavLink instead of Link
 import { useDispatch, useSelector } from 'react-redux'
-import profile from '../../../assets/profile.png'
-import './Navbar.css'
+import { BASE_URL } from '../../../redux/constants'
 import Dropdown from '../dropdown/Dropdown'
+import profileImg from '../../../assets/profile.png'
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button,
+} from '@chakra-ui/react'
+import Sidebar from './SideBar/Sidebar'
+import { IoMenu } from 'react-icons/io5'
+
+import './Navbar.css'
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [toggleDropdown, setToggleDropdown] = useState(false)
   const { userInfo } = useSelector((state) => state.auth)
+  const profile = userInfo?.avatar
+    ? BASE_URL + '/' + userInfo.avatar
+    : profileImg
+  console.log(profile)
 
   return (
     <>
-      <nav>
+      <div style={{ height: '65px' }}></div>
+      {open && <Sidebar open={open} setOpen={setOpen} />}
+      <nav className="nav">
         <ul>
           <li className="logo">
-            Style <span>Nexus</span>
+            <IoMenu className="icon menuIcon" onClick={() => setOpen(!open)} />
+            <p onClick={() => navigate('/')}>
+              Style <span>Nexus</span>
+            </p>
           </li>
           <div className="linkContainer">
             <li>
-              <NavLink exact to={'/'} activeClassName="active">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? 'active navLink' : 'navLink'
+                }
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/shop_all'} activeClassName="active">
+              <NavLink
+                to="/shop_all"
+                className={({ isActive }) =>
+                  isActive ? 'active navLink' : 'navLink'
+                }
+              >
                 Shop All
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/about'} activeClassName="active">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? 'active navLink' : 'navLink'
+                }
+              >
                 About
               </NavLink>
             </li>
             <li>
-              <NavLink to={'/contact'} activeClassName="active">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? 'active navLink' : 'navLink'
+                }
+              >
                 Contact
               </NavLink>
             </li>
           </div>
           <div className="cartContainer">
-            <li
-              style={{
-                width: '150px',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
+            <>
               {userInfo ? (
-                <>
-                  <img
-                    src={profile}
-                    alt={userInfo.firstName}
-                    className="profile-img"
-                    onClick={() => setToggleDropdown(!toggleDropdown)}
-                  />
-                </>
+                <div className="flexContainer">
+                  <li>
+                    <Link
+                      to="/cart"
+                      className={({ isActive }) =>
+                        isActive ? 'active' : 'icon '
+                      }
+                    >
+                      <IoBagOutline className="cart" />
+                    </Link>
+                  </li>
+                  <Menu>
+                    <MenuButton id="menuBtn">
+                      <img src={profile} className="profile-img" />
+                    </MenuButton>
+                    {<Dropdown />}
+                  </Menu>
+                </div>
               ) : (
-                <Link to={'/login'} className="login">
+                <Link to="/login" className="login">
                   Sign in/Sign up
                 </Link>
               )}
-            </li>
-            <li>
-              <NavLink to={'/cart'} className="icon" activeClassName="active">
-                <IoBagOutline />
-              </NavLink>
-            </li>
+            </>
           </div>
         </ul>
       </nav>
-      {userInfo && toggleDropdown && <Dropdown />}
     </>
   )
 }

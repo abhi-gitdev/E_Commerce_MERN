@@ -77,7 +77,6 @@ const Login = () => {
                 type="text"
                 name="password"
                 onChange={handleChange}
-                autocomplete="current-password"
                 value={formData.password}
                 required
               />

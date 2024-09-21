@@ -4,6 +4,17 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../redux/features/auth/authSlice'
 import { useLogoutMutation } from '../../../redux/api/usersApiSlice'
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button,
+} from '@chakra-ui/react'
 import './Dropdown.css'
 
 const Dropdown = () => {
@@ -11,7 +22,6 @@ const Dropdown = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [logoutApiCall] = useLogoutMutation()
-  console.log(logoutApiCall)
   const handleLogout = async () => {
     try {
       await logoutApiCall().unwrap()
@@ -22,28 +32,43 @@ const Dropdown = () => {
     }
   }
   return (
-    <div className="dropdown" style={{}}>
-      <ul
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'space-evenly',
-        }}
-      >
-        <Link to={'/profile'}>Profile</Link>
-        {userInfo && userInfo.role == 'admin' && (
-          <>
-            <Link to={'/admin/dashboard'}>Dashboard</Link>
-            <Link to={'/admin/products'}>Products</Link>
-            <Link to={'/admin/category'}>Category</Link>
-            <Link to={'/admin/orders'}>Orders</Link>
-            <Link to={'/admin/users'}>Users</Link>
-          </>
-        )}
-        <Link to={'/my-orders'}>My orders</Link>
-        <Link onClick={handleLogout}>Logout</Link>
-      </ul>
-    </div>
+    <>
+      <MenuList>
+        <MenuGroup>
+          <Link to={'/profile'}>
+            <MenuItem>Profile</MenuItem>
+          </Link>
+          <Link to={'/my-orders'}>
+            <MenuItem>My orders</MenuItem>
+          </Link>
+          {userInfo && userInfo.role == 'admin' && (
+            <>
+              <Link to={'/admin/dashboard'}>
+                <MenuItem>Dashboard</MenuItem>
+              </Link>
+              <Link to={'/admin/products'}>
+                <MenuItem>Products</MenuItem>
+              </Link>
+              <Link to={'/admin/categoryList'}>
+                <MenuItem>Category</MenuItem>
+              </Link>
+              <Link to={'/admin/orders'}>
+                <MenuItem>Orders</MenuItem>
+              </Link>
+              <Link to={'/admin/users'}>
+                <MenuItem>Users</MenuItem>
+              </Link>
+            </>
+          )}
+        </MenuGroup>
+        <MenuDivider />
+        <MenuGroup>
+          <Link onClick={handleLogout}>
+            <MenuItem>Logout</MenuItem>
+          </Link>
+        </MenuGroup>
+      </MenuList>
+    </>
   )
 }
 

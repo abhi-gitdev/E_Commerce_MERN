@@ -12,18 +12,3 @@
   padding: 0;
   width: 100%;
 }
-
-.dropdown ul a {
-  list-style: none;
-  margin: 10px 0;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  color: rgb(129, 57, 196);
-}
-
-.dropdown ul a:hover {
-  color: rgb(43, 0, 83);
-}

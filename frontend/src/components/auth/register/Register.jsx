@@ -34,6 +34,7 @@ const Register = () => {
     lastName: '',
     email: '',
     phone: '',
+    avatar: null,
     address: '',
     state: '',
     city: '',
@@ -52,15 +53,28 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const form = new FormData()
+
+    form.append('firstName', formData.firstName)
+    form.append('lastName', formData.lastName)
+    form.append('email', formData.email)
+    form.append('phone', formData.phone)
+    form.append('address', formData.address)
+    form.append('city', formData.city)
+    form.append('state', formData.state)
+    form.append('password', formData.password)
+
+    if (formData.avatar) {
+      form.append('avatar', formData.avatar)
+    }
+
     try {
-      const res = await register(formData).unwrap()
-      console.log(res)
+      const res = await register(form).unwrap() // Use FormData instead of formData object
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
-      toast.success('User successfully registered.')
+      toast.success('Successfully registered.')
     } catch (error) {
-      console.log(error.data.message)
-      toast.error(error.data.message)
+      toast.error(error.data.message || 'Registration failed')
     }
   }
 
@@ -75,7 +89,11 @@ const Register = () => {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form
+      className="form"
+      onSubmit={handleSubmit}
+      enctype="multipart/form-data"
+    >
       <div className="formDiv">
         <div className="formHeading">
           <h1>{FormTitle[page]}</h1>

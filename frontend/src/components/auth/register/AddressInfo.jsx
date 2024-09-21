@@ -1,7 +1,7 @@
 import React from 'react'
 import { indianStates, indianCities } from '../../data/indiaData.js'
 import { FaAddressBook } from 'react-icons/fa6'
-import { FaPhoneAlt } from 'react-icons/fa'
+import { FaPhoneAlt, FaImage } from 'react-icons/fa'
 
 const AddressInfo = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -11,8 +11,19 @@ const AddressInfo = ({ formData, setFormData }) => {
       [name]: value,
     })
   }
+  const handleFileChange = (e) => {
+    console.log(e.target.files[0])
+    setFormData({
+      ...formData,
+      avatar: e.target.files[0],
+    })
+  }
   return (
     <div className="divContainer">
+      <div className="ipContainer select">
+        <label htmlFor="avatar">Profile Photo:</label>
+        <input type="file" name="avatar" onChange={handleFileChange} required />
+      </div>
       <div className="ipContainer slideUp">
         <FaAddressBook className="icon stick" />
         <input

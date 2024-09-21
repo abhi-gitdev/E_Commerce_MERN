@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   useGetUsersQuery,
   useGetUserDetailsQuery,
@@ -8,12 +8,8 @@ import {
 import Loader from '../../common/Loader/Loader'
 import Message from '../../common/Message/Message'
 import Tables from '../../common/Table/Tables'
-
+import './UsersList.css'
 const columns = [
-  {
-    Header: 'ID',
-    accessor: '_id',
-  },
   {
     Header: ' First Name',
     accessor: 'firstName',
@@ -34,20 +30,27 @@ const columns = [
     Header: 'Phone Number',
     accessor: 'phone',
   },
+  {
+    Header: 'City',
+    accessor: 'city',
+  },
+  {
+    Header: 'State',
+    accessor: 'state',
+  },
 ]
 
 const UsersList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery()
   const [deleteUser] = useDeleteUserMutation()
   const [updateUser] = useUpdateUserMutation()
-  //   console.log(users)
 
   useEffect(() => {
     refetch()
   }, [refetch])
 
   return (
-    <div>
+    <div className="usersList">
       <h1>Users</h1>
       {isLoading ? (
         <Loader />
@@ -56,7 +59,7 @@ const UsersList = () => {
           {error?.data.message || error.message}
         </Message>
       ) : (
-        <Tables rows={users} columns={columns} />
+        <Tables rows={users} columns={columns} deleteUser={deleteUser} />
       )}
     </div>
   )

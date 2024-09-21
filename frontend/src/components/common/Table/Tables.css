@@ -2,9 +2,10 @@
 
 /* General Container */
 .getUsers {
-  margin: 2rem auto;
   background-color: #f9f9f9;
   padding: 2rem;
+  width: 100%;
+  margin: 20px 0;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -16,6 +17,7 @@
   align-items: center;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 /* Search Input */
@@ -119,13 +121,13 @@ td {
 }
 
 .link2 {
-  color: #007bff;
+  color: black;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .link2:hover {
-  color: #0056b3;
+  color: black;
   text-decoration: underline;
 }
 
@@ -138,14 +140,14 @@ td {
 }
 
 .opt {
-  color: #007bff;
+  color: #7e7e7e;
   cursor: pointer;
   transition: color 0.3s ease;
   font-size: 20px;
 }
 
 .opt:hover {
-  color: #0056b3;
+  color: #000000;
 }
 
 /* Status Classes

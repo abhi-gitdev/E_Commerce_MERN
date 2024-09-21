@@ -7,7 +7,7 @@ const AdminRoute = () => {
   return userInfo && userInfo.role == 'admin' ? (
     <Outlet />
   ) : (
-    <Navigate to={'/login'} replace /> //due to replace user cant go back from browser's back button
+    <Navigate to={'/login'} replace />
   )
 }
 export default AdminRoute

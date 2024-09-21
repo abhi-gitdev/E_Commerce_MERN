@@ -12,13 +12,19 @@ import {
   deleteUser,
 } from '../controllers/userController.js'
 import { authenticate, authorized } from '../middlewares/authMiddleware.js'
+import { upload } from '../utils/multer.js'
 
 router
   .route('/profile')
   .get(authenticate, getUserProfile)
   .put(authenticate, updateUserProfile)
 
-router.route('/register').post(createUser)
+router.post(
+  '/register',
+  upload.fields([{ name: 'avatar', maxCount: 1 }]),
+  createUser
+)
+
 router.route('/auth').post(loginUser)
 router.route('/logout').post(logoutUser)
 router.route('/users-list').get(authenticate, authorized, getAllUsers)

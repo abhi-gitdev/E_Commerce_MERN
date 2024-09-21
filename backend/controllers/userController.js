@@ -115,6 +115,9 @@ export const updateUserById = asyncHandler(async (req, res) => {
 })
 
 export const createUser = asyncHandler(async (req, res) => {
+  console.log('Files:', req.files) // Log the files object
+  console.log('Body:', req.body) // Log the request body
+  const avatar = req.files.avatar ? req.files.avatar[0].filename : ''
   const { firstName, lastName, email, phone, address, city, state, password } =
     req.body
   if (
@@ -146,6 +149,7 @@ export const createUser = asyncHandler(async (req, res) => {
     city,
     state,
     password: hashedPassword,
+    avatar,
   })
   try {
     await newUser.save()
@@ -162,6 +166,8 @@ export const createUser = asyncHandler(async (req, res) => {
       avatar,
     })
   } catch (err) {
+    console.log(err)
+
     res.status(400)
     throw new Error('Invalid user data')
   }
