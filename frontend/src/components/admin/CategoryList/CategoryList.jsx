@@ -94,7 +94,7 @@ const CategoryList = () => {
   return (
     <div className="categories">
       {/* <AdminMenu/> */}
-      <div className="manageCategory">Manage Category</div>
+      <div className="heading">Manage Category</div>
       <CategoryForm
         value={name}
         setValue={setName}

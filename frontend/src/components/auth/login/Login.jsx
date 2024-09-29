@@ -7,6 +7,8 @@ import { toast } from 'react-toastify'
 import { useLoginMutation } from '../../../redux/api/usersApiSlice'
 import Loader from '../../common/Loader/Loader'
 import { setCredentials } from '../../../redux/features/auth/authSlice'
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { BeatLoader } from 'react-spinners'
 import '../register/Register.css'
 
 const Login = () => {
@@ -16,7 +18,6 @@ const Login = () => {
   })
 
   const [login, { isLoading }] = useLoginMutation()
-  console.log(useLoginMutation())
 
   const { userInfo } = useSelector((state) => state.auth)
   const navigate = useNavigate()
@@ -44,7 +45,6 @@ const Login = () => {
     e.preventDefault()
     try {
       const res = await login(formData).unwrap()
-      console.log(res)
       dispatch(setCredentials({ ...res }))
     } catch (err) {
       toast.error(err?.data?.message || err.message)
@@ -72,9 +72,8 @@ const Login = () => {
             </div>
             <div className="ipContainer slideUp">
               <RiLockPasswordFill className="icon stick" />
-
               <input
-                type="text"
+                type="password" // Change input type to password for security
                 name="password"
                 onChange={handleChange}
                 value={formData.password}
@@ -91,11 +90,16 @@ const Login = () => {
             </Link>
             <Link to="/forgot-password">Forgot Password?</Link>
           </div>
-          <button className="btn subBtn" type="submit" disabled={isLoading}>
-            {isLoading ? 'Signing In...' : 'Sign in'}
-          </button>
+          <Button
+            type="submit"
+            colorScheme="green"
+            isLoading={isLoading}
+            spinner={<BeatLoader size={8} color="white" />}
+            loadingText="Signing In"
+          >
+            Sign in
+          </Button>
         </div>
-        {isLoading && <Loader />}
       </form>
     </>
   )

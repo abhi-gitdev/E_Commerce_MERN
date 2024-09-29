@@ -8,6 +8,7 @@ import Profile from './components/user/Profile'
 import AdminRoute from './components/AdminRoute'
 import UsersList from './components/admin/UsersList/UsersList'
 import CategoryList from './components/admin/CategoryList/CategoryList'
+import ProductsList from './components/admin/ProductsList/ProductsList'
 import './App.css'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="orders" element={<Dropdown />} />
           <Route path="users" element={<UsersList />} />
           <Route path="categoryList" element={<CategoryList />} />
+          <Route path="productsList" element={<ProductsList />} />
         </Route>
       </Routes>
     </BrowserRouter>
