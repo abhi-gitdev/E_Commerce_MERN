@@ -102,3 +102,25 @@
 .productsList::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.cardContainer2 {
+  height: 180px;
+  width: fit-content;
+
+  display: flex;
+  cursor: pointer;
+}
+.cardContainer2:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.cardContainer2 .pImg {
+  height: 180px;
+  width: 150px;
+}
+.cardContainer2 .cardInfo {
+  display: flex;
+  text-wrap: wrap;
+  flex-wrap: wrap;
+  height: 180px;
+  justify-content: space-between;
+  flex-direction: column;
+}

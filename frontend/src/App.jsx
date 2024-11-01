@@ -9,16 +9,20 @@ import AdminRoute from './components/AdminRoute'
 import UsersList from './components/admin/UsersList/UsersList'
 import CategoryList from './components/admin/CategoryList/CategoryList'
 import ProductsList from './components/admin/ProductsList/ProductsList'
+import CreateProduct from './components/admin/ProductsList/CreateProduct'
+import ProductCard from './components/common/cards/ProductCard'
 import './App.css'
+import Home from './components/Home/Home'
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route path="/register" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/d" element={<Dropdown />} />
+        <Route path="/productCard" element={<ProductCard />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="profile" element={<Profile />} />
           <Route path="my-orders" element={<Dropdown />} />
@@ -29,6 +33,7 @@ function App() {
           <Route path="orders" element={<Dropdown />} />
           <Route path="users" element={<UsersList />} />
           <Route path="categoryList" element={<CategoryList />} />
+          <Route path="createProduct" element={<CreateProduct />} />
           <Route path="productsList" element={<ProductsList />} />
         </Route>
       </Routes>
