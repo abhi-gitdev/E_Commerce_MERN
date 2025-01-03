@@ -4,8 +4,38 @@ import Category from '../models/categoryModel.js'
 
 export const createProduct = asyncHandler(async (req, res) => {
   try {
-    const { name, price, description, quantity, category } = req.body
-    if (!name || !price || !description || !quantity || !category) {
+    console.log(req.body)
+
+    const {
+      name,
+      brand,
+      price,
+      description,
+      quantity,
+      category,
+      ItemWeight,
+      Packer,
+      ManufacturerAddress,
+      CountryOfOrigin,
+      Manufacturer,
+      DateFirstAvailable,
+      ProductDimensions,
+    } = req.body
+    if (
+      !name ||
+      !price ||
+      !description ||
+      !quantity ||
+      !category ||
+      !ItemWeight ||
+      !Packer ||
+      !ManufacturerAddress ||
+      !CountryOfOrigin ||
+      !Manufacturer ||
+      !DateFirstAvailable ||
+      !ProductDimensions ||
+      !brand
+    ) {
       res.status(400)
       throw new Error('All fields are mandatory!')
     }
@@ -15,10 +45,19 @@ export const createProduct = asyncHandler(async (req, res) => {
     const product = new Product({
       name,
       price,
+      brand,
       description,
       images: imagePaths,
       quantity,
       category,
+      countInStock: quantity,
+      ItemWeight,
+      Packer,
+      ManufacturerAddress,
+      CountryOfOrigin,
+      Manufacturer,
+      DateFirstAvailable,
+      ProductDimensions,
     })
 
     await product.save()
@@ -31,8 +70,38 @@ export const createProduct = asyncHandler(async (req, res) => {
 
 export const updateProductDetails = asyncHandler(async (req, res) => {
   try {
-    const { name, price, description, quantity, category } = req.body
-    if (!name || !price || !description || !quantity || !category) {
+    const {
+      name,
+      brand,
+      price,
+      description,
+      quantity,
+      category,
+      countInStock,
+      ItemWeight,
+      Packer,
+      ManufacturerAddress,
+      CountryOfOrigin,
+      Manufacturer,
+      DateFirstAvailable,
+      ProductDimensions,
+    } = req.body
+    if (
+      !name ||
+      !brand ||
+      !price ||
+      !description ||
+      !quantity ||
+      !category ||
+      !countInStock ||
+      !ItemWeight ||
+      !Packer ||
+      !ManufacturerAddress ||
+      !CountryOfOrigin ||
+      !Manufacturer ||
+      !DateFirstAvailable ||
+      !ProductDimensions
+    ) {
       res.status(400)
       throw new Error('All fields are mandatory!')
     }
@@ -95,7 +164,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({})
       .populate('category')
       .limit(12)
-      .sort({ createAt: -1 })
+      .sort({ createdAt: -1 })
     if (!products) {
       res.status(404)
       throw new Error('No product found!')
@@ -129,10 +198,12 @@ export const addProductReview = asyncHandler(async (req, res) => {
       const alreadyReviewed = product.reviews.find(
         (r) => r.user.toString() === req.user._id.toString() //learn it why toString()
       )
+
       if (alreadyReviewed) {
         res.status(400)
         throw new Error('Product already reviewed')
       }
+
       const review = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
@@ -141,7 +212,7 @@ export const addProductReview = asyncHandler(async (req, res) => {
         user: req.user._id,
       }
 
-      product.review.push(review)
+      product.reviews.push(review)
       product.numReviews = product.reviews.length
       product.rating =
         product.reviews.reduce((acc, item) => item.rating + acc, 0) /
@@ -154,6 +225,26 @@ export const addProductReview = asyncHandler(async (req, res) => {
       res.status(404)
       throw new Error('Product not found')
     }
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: error.message })
+  }
+})
+
+export const getTopProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({}).sort({ rating: -1 }).limit(6)
+    res.json(products)
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: error.message })
+  }
+})
+
+export const getNewProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({}).sort({ _id: -1 }).limit(6)
+    res.json(products)
   } catch (error) {
     console.log(error)
     res.status(400).json({ message: error.message })

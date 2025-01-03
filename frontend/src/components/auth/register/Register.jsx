@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useRegisterMutation } from '../../../redux/api/usersApiSlice.js'
 import 'react-toastify/dist/ReactToastify.css'
-import { Button, ButtonGroup } from '@chakra-ui/react'
-import { BeatLoader } from 'react-spinners'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -121,15 +119,9 @@ const Register = () => {
             </button>
           )}
           {page == 1 ? (
-            <Button
-              type="submit"
-              colorScheme="green"
-              isLoading={isLoading}
-              spinner={<BeatLoader size={8} color="white" />}
-              loadingText="Signing Up"
-            >
-              Sign Up
-            </Button>
+            <button className="btn subBtn" type="submit">
+              {isLoading ? <>Signing Up...</> : <>Sign Up</>}
+            </button>
           ) : (
             <button
               className="btn"
@@ -143,6 +135,7 @@ const Register = () => {
           )}
         </div>
       </div>
+      {isLoading && <Loader />}
     </form>
   )
 }

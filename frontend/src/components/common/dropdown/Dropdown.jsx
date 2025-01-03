@@ -46,7 +46,7 @@ const Dropdown = () => {
               <Link to={'/admin/dashboard'}>
                 <MenuItem>Dashboard</MenuItem>
               </Link>
-              <Link to={'/admin/products'}>
+              <Link to={'/admin/productsList'}>
                 <MenuItem>Products</MenuItem>
               </Link>
               <Link to={'/admin/categoryList'}>

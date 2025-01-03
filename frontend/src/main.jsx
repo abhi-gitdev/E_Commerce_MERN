@@ -11,14 +11,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 const theme = createTheme({})
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <ChakraProvider>
-          <App />
-          <ToastContainer />
-        </ChakraProvider>
-      </ThemeProvider>
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <ChakraProvider>
+        <App />
+        <ToastContainer />
+      </ChakraProvider>
+    </ThemeProvider>
+  </Provider>
 )

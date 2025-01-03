@@ -14,7 +14,7 @@ import { Button } from '@chakra-ui/react'
 const CategoryList = () => {
   const [name, setName] = useState('')
   const { data: categories, refetch } = useGetCategoriesQuery()
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [updateName, setUpdateName] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -94,7 +94,7 @@ const CategoryList = () => {
   return (
     <div className="categories">
       {/* <AdminMenu/> */}
-      <div className="heading">Manage Category</div>
+      <div className="manageCategory">Manage Category</div>
       <CategoryForm
         value={name}
         setValue={setName}

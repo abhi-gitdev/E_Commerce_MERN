@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    brand: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,
@@ -29,6 +33,13 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    ProductDimensions: { type: String, required: true },
+    DateFirstAvailable: { type: Date, required: true },
+    Manufacturer: { type: String, required: true },
+    CountryOfOrigin: { type: String, required: true },
+    ManufacturerAddress: { type: String, required: true },
+    Packer: { type: String, required: true },
+    ItemWeight: { type: String, required: true },
     images: [
       {
         type: String,

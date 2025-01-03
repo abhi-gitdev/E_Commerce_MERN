@@ -6,6 +6,7 @@ import path from 'path'
 import userRoutes from './routes/userRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 import cors from 'cors'
 
@@ -22,6 +23,7 @@ app.use(
     credentials: true,
   })
 )
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -30,6 +32,7 @@ app.use(express.static('uploads'))
 app.use('/api/users', userRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
+app.use('/api/upload', uploadRoutes)
 
 app.listen(port, () => {
   console.log(`Running on server http://localhost:${port}`)

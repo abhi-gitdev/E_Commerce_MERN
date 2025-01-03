@@ -19,8 +19,8 @@ const Tables = ({ columns, rows, name, update, deleteUser }) => {
   const [editableUserId, setEditableUserId] = useState(false)
 
   const filteredRows = useMemo(() => {
-    return rows.filter((row) =>
-      Object.values(row).some((val) =>
+    return rows?.filter((row) =>
+      Object?.values(row).some((val) =>
         String(val).toLowerCase().includes(keyword.toLowerCase())
       )
     )
@@ -87,9 +87,9 @@ const Tables = ({ columns, rows, name, update, deleteUser }) => {
         <div className="table-container">
           <table ref={tableRef} {...getTableProps()}>
             <thead>
-              {headerGroups.map((hg, i) => (
+              {headerGroups?.map((hg, i) => (
                 <tr key={i} {...hg.getHeaderGroupProps()}>
-                  {hg.headers.map((header, i) => (
+                  {hg.headers?.map((header, i) => (
                     <th
                       key={i}
                       {...header.getHeaderProps(header.getSortByToggleProps())}
@@ -115,7 +115,7 @@ const Tables = ({ columns, rows, name, update, deleteUser }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row, i) => {
+              {page?.map((row, i) => {
                 prepareRow(row)
                 return (
                   <tr {...row.getRowProps()} className="row">

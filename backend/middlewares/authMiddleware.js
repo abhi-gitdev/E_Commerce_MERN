@@ -7,7 +7,7 @@ const authenticate = asyncHandler(async (req, res, next) => {
   console.log(req.cookies)
 
   token = req.cookies.jwt
-
+  console.log({ req })
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.SECRET_TOKEN)

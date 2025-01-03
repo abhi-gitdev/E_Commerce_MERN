@@ -10,6 +10,8 @@ import {
   getProductById,
   getAllProducts,
   addProductReview,
+  getTopProducts,
+  getNewProducts,
 } from '../controllers/productController.js'
 import multer from 'multer'
 
@@ -21,6 +23,7 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`)
   },
 })
+
 const upload = multer({ storage }).array('images', 10)
 
 const router = express.Router()
@@ -29,8 +32,13 @@ router
   .route('/')
   .get(getProducts)
   .post(authenticate, authorized, upload, createProduct)
-router.route('/getAllProducts').get(getAllProducts)
+
+router.route('/allProducts').get(getAllProducts)
+router.route('/top').get(getTopProducts)
+router.route('/new').get(getNewProducts)
+
 router.route('/:id/reviews').post(authenticate, addProductReview)
+
 router
   .route('/:id')
   .get(getProductById)

@@ -167,7 +167,6 @@ export const createUser = asyncHandler(async (req, res) => {
     })
   } catch (err) {
     console.log(err)
-
     res.status(400)
     throw new Error('Invalid user data')
   }

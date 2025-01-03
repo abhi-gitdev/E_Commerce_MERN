@@ -1,0 +1,126 @@
+.productsList .flexContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.productsList .heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+  gap: 10px;
+}
+
+.one {
+  flex: 1.25;
+  width: 50%;
+}
+
+.one .ipContainer {
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.one .flexContainer {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.one .flexContainer .ipContainer {
+  margin: 0;
+}
+
+.two {
+  flex: 0.75;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  margin: 40px 0px;
+  height: 650px;
+  overflow-y: auto;
+}
+
+.image {
+  padding: 85px 50px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.subTwo {
+  position: relative;
+  width: 100%;
+}
+
+.upload {
+  display: block;
+  background-color: rgba(126, 126, 126, 0.1);
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+.upload:hover {
+  background-color: rgba(215, 215, 215, 0.1);
+}
+.image {
+  display: none;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.imagePreview,
+.img {
+  height: 300px;
+}
+
+.productsList ::-webkit-scrollbar {
+  width: 4px;
+}
+.productsList ::-webkit-scrollbar-thumb {
+  background-color: #0000007a;
+  border-radius: 10px;
+}
+.productsList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.cardContainer2 {
+  height: 180px;
+  width: fit-content;
+
+  display: flex;
+  cursor: pointer;
+}
+.cardContainer2:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.cardContainer2 .pImg {
+  height: 180px;
+  width: 150px;
+}
+.cardContainer2 .cardInfo {
+  display: flex;
+  text-wrap: wrap;
+  flex-wrap: wrap;
+  height: 180px;
+  justify-content: space-between;
+  flex-direction: column;
+}

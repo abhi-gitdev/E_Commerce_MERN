@@ -1,5 +1,8 @@
-.heading {
-  margin: 20px 0;
+.categories {
+  margin: 25px 0;
+}
+
+.manageCategory {
   font-size: 30px;
   font-weight: 550;
 }
@@ -15,7 +18,6 @@
   display: flex;
   gap: 10px;
   margin: 10px;
-  flex-wrap: wrap;
 }
 
 .modal {
