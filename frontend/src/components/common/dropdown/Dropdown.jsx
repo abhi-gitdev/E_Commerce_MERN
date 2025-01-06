@@ -31,6 +31,7 @@ const Dropdown = () => {
       console.error(error)
     }
   }
+
   return (
     <>
       <MenuList>
@@ -46,7 +47,7 @@ const Dropdown = () => {
               <Link to={'/admin/dashboard'}>
                 <MenuItem>Dashboard</MenuItem>
               </Link>
-              <Link to={'/admin/productsList'}>
+              <Link to={'/admin/allProducts'}>
                 <MenuItem>Products</MenuItem>
               </Link>
               <Link to={'/admin/categoryList'}>

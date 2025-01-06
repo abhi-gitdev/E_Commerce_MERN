@@ -5,17 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BASE_URL } from '../../../redux/constants'
 import Dropdown from '../dropdown/Dropdown'
 import profileImg from '../../../assets/profile.png'
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-} from '@chakra-ui/react'
+import { Menu, MenuButton } from '@chakra-ui/react'
 import Sidebar from './SideBar/Sidebar'
 import { IoMenu } from 'react-icons/io5'
 
@@ -105,7 +95,7 @@ const Navbar = () => {
                     <MenuButton id="menuBtn">
                       <img src={profile} className="profile-img" />
                     </MenuButton>
-                    {<Dropdown />}
+                    <Dropdown />
                   </Menu>
                 </div>
               ) : (

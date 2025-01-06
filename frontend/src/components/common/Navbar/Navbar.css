@@ -3,7 +3,7 @@
 .nav {
   position: fixed;
   width: 100%;
-  background-color: rgb(237, 242, 247);
+  background-color: #3a2e2a;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   z-index: 100;
   top: 0;
@@ -28,6 +28,7 @@
   gap: 20px;
   display: flex;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 .logo span {
   font-weight: bold;
@@ -48,6 +49,7 @@
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   font-size: 18px;
+  color: white;
 }
 
 .linkContainer {
@@ -74,14 +76,14 @@
   height: 40px;
   border-radius: 100%;
   cursor: pointer;
+  object-fit: cover;
+  border: 2px solid white;
 }
 .cart {
   font-size: 30px;
 }
 .nav ul li a.active {
   text-decoration: underline;
-  color: black;
-  font-weight: bold;
 }
 .menuIcon {
   display: none;
@@ -92,6 +94,7 @@
   align-items: center;
   margin: 0;
   font-size: 20px;
+  color: white;
 }
 .flexContainer {
   display: flex;

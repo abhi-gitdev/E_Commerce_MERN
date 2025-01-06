@@ -1,3 +1,4 @@
+import './ProductsList.css'
 import React, { useState } from 'react'
 import { useCreateProductMutation } from '../../../redux/api/productSlice'
 import { useGetCategoriesQuery } from '../../../redux/api/categoryApiSlice'
@@ -5,7 +6,6 @@ import { toast } from 'react-toastify'
 import { LuUpload } from 'react-icons/lu'
 import { FaPlus } from 'react-icons/fa6'
 import { BeatLoader } from 'react-spinners'
-import './ProductsList.css'
 import { useNavigate } from 'react-router'
 import {
   Input,
@@ -198,34 +198,40 @@ const CreateProduct = () => {
             </div>
           </div>
           <div className="flexContainer">
-            <Select
-              placeholder="Select Category"
-              border={'1px'}
-              name="category"
-              value={productData.category}
-              onChange={handleChange}
-              required
-            >
-              {categories?.map((category) => (
-                <option key={uuidv4()} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </Select>
-            <Select
-              placeholder="Select Country of Origin"
-              border={'1px'}
-              name="CountryOfOrigin"
-              value={productData.CountryOfOrigin}
-              onChange={handleChange}
-              required
-            >
-              {countries?.map((country) => (
-                <option key={uuidv4()} value={country}>
-                  {country}
-                </option>
-              ))}
-            </Select>
+            <div className="ipContainer">
+              <label htmlFor="category">Category:</label>
+              <Select
+                placeholder="Select Category"
+                border={'1px'}
+                name="category"
+                value={productData.category}
+                onChange={handleChange}
+                required
+              >
+                {categories?.map((category) => (
+                  <option key={uuidv4()} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            <div className="ipContainer">
+              <label htmlFor="CountryOfOrigin">Country of Origin:</label>
+              <Select
+                placeholder="Select Country of Origin"
+                border={'1px'}
+                name="CountryOfOrigin"
+                value={productData.CountryOfOrigin}
+                onChange={handleChange}
+                required
+              >
+                {countries?.map((country) => (
+                  <option key={uuidv4()} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </Select>
+            </div>
           </div>
           <div className="flexContainer">
             <div className="ipContainer">
@@ -306,7 +312,7 @@ const CreateProduct = () => {
                 <img
                   src={imageUrl}
                   alt={`Product Preview ${index + 1}`}
-                  className="img"
+                  className="productImg img"
                 />
               </div>
             )

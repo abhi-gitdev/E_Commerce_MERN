@@ -11,7 +11,11 @@ import CategoryList from './components/admin/CategoryList/CategoryList'
 import CreateProduct from './components/admin/Products/CreateProduct'
 import ProductsList from './components/admin/Products/ProductsList'
 import Home from './components/Home/Home'
+import AllProducts from './components/admin/Products/AllProducts'
+import Footer from './components/common/footer/Footer'
 import './App.css'
+import UpdateProduct from './components/admin/Products/UpdateProduct'
+import ProductPage from './components/ProductPage/ProductPage'
 
 function App() {
   return (
@@ -20,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/d" element={<Dropdown />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="profile" element={<Profile />} />
           <Route path="my-orders" element={<Dropdown />} />
@@ -31,9 +35,12 @@ function App() {
           <Route path="users" element={<UsersList />} />
           <Route path="categoryList" element={<CategoryList />} />
           <Route path="createProduct" element={<CreateProduct />} />
+          <Route path="updateProduct/:id" element={<UpdateProduct />} />
           <Route path="productsList" element={<ProductsList />} />
+          <Route path="allProducts" element={<AllProducts />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

@@ -1,3 +1,7 @@
+.productsList {
+  margin-top: 15px;
+}
+
 .productsList .flexContainer {
   display: flex;
   align-items: flex-start;
@@ -8,6 +12,11 @@
   justify-content: space-between;
   margin-bottom: 0;
   gap: 10px;
+}
+
+.productsList .heading div {
+  display: flex;
+  gap: 15px;
 }
 
 .one {
@@ -32,7 +41,7 @@
 }
 
 .two {
-  flex: 0.75;
+  flex: 0.8;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -87,11 +96,6 @@
   font-weight: 300;
 }
 
-.imagePreview,
-.img {
-  height: 300px;
-}
-
 .productsList ::-webkit-scrollbar {
   width: 4px;
 }
@@ -102,25 +106,43 @@
 .productsList::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.cardContainer2 {
-  height: 180px;
-  width: fit-content;
 
+#ProductsList {
   display: flex;
-  cursor: pointer;
-}
-.cardContainer2:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-.cardContainer2 .pImg {
-  height: 180px;
-  width: 150px;
-}
-.cardContainer2 .cardInfo {
-  display: flex;
-  text-wrap: wrap;
-  flex-wrap: wrap;
-  height: 180px;
-  justify-content: space-between;
   flex-direction: column;
+}
+
+.productsCards {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.h3 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.pImages2 {
+  display: flex;
+  justify-content: flex-end;
+}
+.pImages2 .icon {
+  position: absolute;
+  text-align: end;
+  margin: 10px;
+  color: brown;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.pImages2 .icon:hover {
+  color: red;
+}
+
+#allProducts h1 {
+  margin: 20px 10px;
 }

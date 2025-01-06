@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Wittgenstein:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.productDetails {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  /* font-family: 'Noto Sans', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.pName {
+  font-size: 1.7vmax;
+  font-family: 'Wittgenstein', serif;
+}
+.pDetailsH {
+  font-size: 1.2vmax;
+  font-weight: bold;
+}
+.PDhead {
+  font-weight: 550;
+}
+.content {
+  width: 50%;
+}
+
+.path {
+  margin: 3vmax 0 1vmax 4vmax;
+}
+
+.info p {
+  margin: 1vmax;
+  font-size: 1.2vmax;
+}
+
+.path a {
+  text-decoration: none;
+  color: rgb(99, 99, 99);
+}
+
+.path a:hover {
+  text-decoration: underline;
+}
+
+.imageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30vmax;
+  margin: 0 auto;
+}
+
+.slide,
+.thumb img {
+  border-radius: 0.4rem;
+  box-shadow: 0px 0px 7px rgb(78, 78, 78);
+  width: 100%;
+  height: 100%;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
+}
+
+.slide:hover {
+  transform: scale(1.3);
+  cursor: zoom-in;
+}
+.slide.slide-hidden {
+  display: none;
+}
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumb img {
+  width: 6vmax;
+  margin: 1vmax;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.thumb img:hover {
+  border: 2px solid black;
+  transform: translateY(-0.5rem);
+  box-sizing: border-box;
+}
+
+.productImg2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vmax 1vmax;
+}
+.imageDiv:hover .arrow {
+  display: none;
+}
+
+.buyBtn {
+  padding: 0.4vmax 1vmax;
+  border-radius: 0.5vmax;
+  background-color: rgba(46, 46, 46, 0.8);
+  color: rgb(255, 255, 255);
+  outline: none;
+  width: 50%;
+  font-size: 1.3vmax;
+  margin-right: 0.5vmax;
+  transition: all 0.3s ease-in-out;
+}
+.redColor {
+  color: red;
+}
+.greenColor {
+  color: green;
+}
+.buyBtn:hover {
+  box-sizing: border-box;
+  cursor: pointer;
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+
+.price {
+  color: brown;
+  font-size: 1.6vmax;
+  font-weight: bold;
+  text-align: start;
+}
+
+.buyBox {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.qtyDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.qtyDiv input {
+  border: none;
+  padding: 0.5vmax;
+  width: 1vmax;
+  text-align: center;
+  outline: none;
+  font-size: 1.1vmax;
+  border-radius: 0.5vmax;
+}
+.qtBtn {
+  background-color: rgba(46, 46, 46, 0.8);
+  padding: 0.5vmax;
+  color: white;
+  border-radius: 0.5vmax;
+  border: none;
+  font-size: 1.2vmax;
+  outline: none;
+}
+.qtBtn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.status {
+  font-family: 'Arsenal SC', sans-serif;
+  font-size: 1.2vmax;
+}
+
+@media (min-width: 1025px) {
+  .productImg2 {
+    width: 28rem;
+  }
+  .thumb img {
+    width: 4.5vmax;
+  }
+}
+
+@media (max-width: 600px) {
+  .productDetails {
+    flex-direction: column;
+  }
+  .productImg2 {
+    justify-content: center;
+    align-items: center;
+  }
+  .content {
+    margin-top: 1.2vmax;
+    width: 100%;
+  }
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2vmax;
+  overflow: auto;
+}
+.description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vmax;
+}
+
+.description h3 {
+  font-family: 'Wittgenstein', serif;
+  font-size: 1.5vmax;
+  margin-bottom: 1vmax;
+}
+
+.revDiv h3 {
+  margin-top: 1vmax;
+  font-family: 'Wittgenstein', serif;
+  font-size: 1.5vmax;
+  text-align: center;
+}
+
+.reviews > p,
+.description p {
+  font-size: 1.2vmax;
+  margin: 1vmax;
+}
+
+.review {
+  display: flex;
+  overflow: auto;
+}
