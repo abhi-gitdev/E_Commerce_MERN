@@ -40,7 +40,7 @@ export const createProduct = asyncHandler(async (req, res) => {
       throw new Error('All fields are mandatory!')
     }
 
-    const imagePaths = req.files.map((file) => file.path)
+    const imagePaths = req.files.map((file) => file.filename)
 
     const product = new Product({
       name,
@@ -85,7 +85,9 @@ export const updateProductDetails = asyncHandler(async (req, res) => {
       Manufacturer,
       DateFirstAvailable,
       ProductDimensions,
+      imagesToDelete, // This might be a string or an array
     } = req.body
+
     if (
       !name ||
       !brand ||
@@ -106,18 +108,44 @@ export const updateProductDetails = asyncHandler(async (req, res) => {
       throw new Error('All fields are mandatory!')
     }
 
-    const imagePaths = req.files.map((file) => file.path)
-    const product = await Product.findByIdAndUpdate(
+    // Convert imagesToDelete to an array if it's a string
+    const imagesToDeleteArray =
+      typeof imagesToDelete === 'string'
+        ? imagesToDelete.split(',').map((image) => image.trim())
+        : imagesToDelete || []
+
+    // Fetch the existing product
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+      res.status(404)
+      throw new Error('Product not found!')
+    }
+
+    // Remove images specified in imagesToDeleteArray
+    let updatedImages = product.images || []
+    updatedImages = updatedImages.filter(
+      (image) => !imagesToDeleteArray.includes(image)
+    )
+
+    // Add new images from uploaded files
+    const newImagePaths = req.files
+      ? req.files.map((file) => file.filename)
+      : []
+    updatedImages = [...updatedImages, ...newImagePaths]
+
+    // Update product details
+    const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
+        images: updatedImages,
       },
-      { new: true }
+      { new: true } // Return the updated document
     )
-    await product.save()
-    res.json(product)
+
+    res.json(updatedProduct)
   } catch (error) {
-    console.log(error)
+    console.error(error.message)
     res.status(400).json({ message: error.message })
   }
 })
