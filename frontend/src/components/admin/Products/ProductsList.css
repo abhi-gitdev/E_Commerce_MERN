@@ -133,10 +133,11 @@
 .pImages2 .icon {
   position: absolute;
   text-align: end;
-  margin: 10px;
   color: brown;
   cursor: pointer;
   transition: color 0.3s;
+  font-size: 30px;
+  background-color: aliceblue;
 }
 
 .pImages2 .icon:hover {

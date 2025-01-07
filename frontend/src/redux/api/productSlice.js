@@ -70,6 +70,11 @@ export const productApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getCategoryProducts: builder.query({
+      query: (id) => ({
+        url: `${PRODUCT_URL}/getCategoryProducts/${id}`,
+      }),
+    }),
   }),
 })
 
@@ -84,4 +89,5 @@ export const {
   useGetProductsQuery,
   useGetTopProductsQuery,
   useUpdateProductMutation,
+  useGetCategoryProductsQuery,
 } = productApiSlice

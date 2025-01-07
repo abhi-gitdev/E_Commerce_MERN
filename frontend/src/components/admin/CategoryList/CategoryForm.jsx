@@ -4,6 +4,8 @@ import { Input, Button } from '@chakra-ui/react'
 const CategoryForm = ({
   value,
   setValue,
+  image,
+  setImage,
   handleSubmit,
   buttonText = 'Create',
   handleDelete,
@@ -15,6 +17,14 @@ const CategoryForm = ({
           placeholder="Write category name..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
+        />
+        <label htmlFor="image" style={{ fontWeight: 'bold' }}>
+          Upload Category Image:{' '}
+        </label>
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => setImage(e.target.files[0])}
         />
         <div className="buttonDiv">
           <Button colorScheme="blue" variant="solid" type="submit">

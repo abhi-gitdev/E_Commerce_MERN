@@ -146,12 +146,12 @@
 }
 .qtyDiv input {
   border: none;
-  padding: 0.5vmax;
   width: 1vmax;
   text-align: center;
   outline: none;
   font-size: 1.1vmax;
   border-radius: 0.5vmax;
+  margin: 0.5rem;
 }
 .qtBtn {
   background-color: rgba(46, 46, 46, 0.8);
@@ -171,6 +171,35 @@
   font-size: 1.2vmax;
 }
 
+.addReview {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+}
+.addReview div {
+  display: flex;
+  gap: 20px;
+  width: 700px;
+}
+
+.addReviewBtn {
+  width: fit-content;
+  display: flex;
+  background-color: rgb(254, 249, 227);
+}
+
+.addReview .profile-img {
+  width: 70px;
+  height: 70px;
+}
+.rateBtnDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 @media (min-width: 1025px) {
   .productImg2 {
     width: 28rem;
@@ -196,17 +225,19 @@
 
 .reviews {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: flex-start;
   margin-top: 2vmax;
-  overflow: auto;
+  margin: 1vmax;
 }
+
+.reviewsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .description {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
   margin-top: 2vmax;
 }
 
@@ -215,12 +246,13 @@
   font-size: 1.5vmax;
   margin-bottom: 1vmax;
 }
-
+.revDiv {
+  margin: 30px 0;
+}
 .revDiv h3 {
-  margin-top: 1vmax;
+  margin: 2vmax 0;
   font-family: 'Wittgenstein', serif;
   font-size: 1.5vmax;
-  text-align: center;
 }
 
 .reviews > p,

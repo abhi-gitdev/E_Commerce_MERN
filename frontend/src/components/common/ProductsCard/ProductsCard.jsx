@@ -54,15 +54,25 @@ const ProductsCard = ({ product, refetch }) => {
           className="details"
           onClick={() => navigate(`/product/${product._id}`)}
         >
-          <p>{product.name}</p>
+          <p style={{ margin: '0', fontWeight: '550' }}>{product.brand}</p>
+          <p style={{ margin: '0', fontSize: '15px' }}>{product.name}</p>
           {/* <p className="description">
           {product?.description?.substring(0, 60)}...
           </p> */}
-          <div>
-            <Rating {...options} />{' '}
-            <span>({product?.numOfReviews || 0} Reviews)</span>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Rating {...options} /> <span>({product?.numReviews || 0})</span>
           </div>
-          <span>₹{product.price}</span>
+          <span>
+            ₹
+            <span style={{ fontSize: '22px', fontWeight: '400' }}>
+              {product.price}
+            </span>
+          </span>
         </div>
       </div>
     </>

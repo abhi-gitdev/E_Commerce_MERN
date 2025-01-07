@@ -13,9 +13,11 @@ import { Button } from '@chakra-ui/react'
 
 const CategoryList = () => {
   const [name, setName] = useState('')
+  const [image, setImage] = useState('')
   const { data: categories, refetch } = useGetCategoriesQuery()
   const [selectedCategory, setSelectedCategory] = useState('')
   const [updateName, setUpdateName] = useState('')
+  const [updateImage, setUpdateImage] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
   const [createCategory] = useCreateCategoryMutation()
@@ -29,7 +31,10 @@ const CategoryList = () => {
       return
     }
     try {
-      const result = await createCategory({ name }).unwrap()
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('image', image)
+      const result = await createCategory(formData).unwrap()
       console.log(result)
 
       if (result.error) {
@@ -43,7 +48,6 @@ const CategoryList = () => {
       toast.error('Creating category failed, try again!')
     }
   }
-
   const handleUpdateCategory = async (e) => {
     e.preventDefault()
     if (!updateName) {
@@ -51,9 +55,12 @@ const CategoryList = () => {
       return
     }
     try {
+      const formData = new FormData()
+      formData.append('name', updateName)
+      formData.append('image', updateImage)
       const result = await updateCategory({
         categoryId: selectedCategory._id,
-        updatedCategory: { name: updateName },
+        updatedCategory: formData,
       }).unwrap()
       console.log(result)
       if (result.error) {
@@ -69,7 +76,6 @@ const CategoryList = () => {
       toast.error('Error updating the category name, try again!')
     }
   }
-
   const handleDelete = async () => {
     try {
       const result = await deleteCategory(selectedCategory._id).unwrap()
@@ -98,6 +104,8 @@ const CategoryList = () => {
       <CategoryForm
         value={name}
         setValue={setName}
+        image={image}
+        setImage={setImage}
         handleSubmit={handleCreateCategory}
       />
       <br />
@@ -124,6 +132,8 @@ const CategoryList = () => {
         <CategoryForm
           value={updateName}
           setValue={setUpdateName}
+          image={updateImage}
+          setImage={setUpdateImage}
           handleSubmit={handleUpdateCategory}
           buttonText="Update"
           handleDelete={handleDelete}
