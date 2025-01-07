@@ -27,15 +27,19 @@ export const getCategoryById = asyncHandler(async (req, res) => {
 
 export const createCategory = asyncHandler(async (req, res) => {
   try {
+    const image = req.files.image ? req.files.image[0].filename : ''
     const { name } = req.body
     if (!name) {
       return res.json({ error: 'Name is required' })
+    }
+    if (!image) {
+      return res.json({ error: 'Image is required' })
     }
     const existingCategory = await Category.findOne({ name })
     if (existingCategory) {
       return res.json({ error: 'Category already exist' })
     }
-    const category = await new Category({ name }).save()
+    const category = await new Category({ name, image }).save()
     res.json(category)
   } catch (err) {
     console.log(err)
@@ -45,6 +49,8 @@ export const createCategory = asyncHandler(async (req, res) => {
 
 export const updateCategory = asyncHandler(async (req, res) => {
   try {
+    const image = req.files.image ? req.files.image[0].filename : ''
+
     const { name } = req.body
     console.log(req.body)
 
@@ -54,6 +60,7 @@ export const updateCategory = asyncHandler(async (req, res) => {
       return res.status(404).json({ error: 'Category not found' })
     }
     category.name = name
+    category.image = image
     const updatedCategory = await category.save()
     res.json(updatedCategory)
   } catch (error) {

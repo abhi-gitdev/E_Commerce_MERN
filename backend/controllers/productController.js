@@ -235,6 +235,7 @@ export const addProductReview = asyncHandler(async (req, res) => {
       const review = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
+        avatar: req.user.avatar,
         rating: Number(rating),
         comment,
         user: req.user._id,
@@ -261,7 +262,7 @@ export const addProductReview = asyncHandler(async (req, res) => {
 
 export const getTopProducts = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find({}).sort({ rating: -1 }).limit(6)
+    const products = await Product.find({}).sort({ rating: -1 }).limit(5)
     res.json(products)
   } catch (error) {
     console.log(error)
@@ -271,7 +272,19 @@ export const getTopProducts = asyncHandler(async (req, res) => {
 
 export const getNewProducts = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find({}).sort({ _id: -1 }).limit(6)
+    const products = await Product.find({}).sort({ _id: -1 }).limit(5)
+    res.json(products)
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: error.message })
+  }
+})
+
+export const getCategoryProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({ category: req.params.id }).sort({
+      _id: -1,
+    })
     res.json(products)
   } catch (error) {
     console.log(error)
