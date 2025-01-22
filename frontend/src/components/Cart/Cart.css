@@ -1,0 +1,176 @@
+.cartHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #ccc;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.cartHeader .first {
+  flex: 2;
+}
+
+.cartHeader .second {
+  flex: 1;
+}
+
+.cartItemImg {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px auto;
+  width: 90%;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.cartItem:hover {
+  background-color: #f0f0f0;
+}
+
+.cartItem .cartsDiv2 {
+  flex: 2;
+}
+
+.cartItemName {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+.cartItemName:hover {
+  text-decoration: underline;
+}
+.cartItemBrand {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.cartsDiv1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cartsDiv1 p {
+  font-size: 14px;
+  color: #666;
+}
+
+.qtyDiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 3rem;
+}
+
+.qtBtn {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.qtBtn:hover {
+  background-color: #f0f0f0;
+}
+
+.qtyDiv input {
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cartItemTotalPrice {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-right: 5rem;
+}
+
+.cartItemRemoveBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ff4d4d;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.cartItemRemoveBtn:hover {
+  color: #ff1a1a;
+}
+
+#cartPage {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.homeHead2 {
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.qtBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomCheckout {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #ccc;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Wittgenstein', serif;
+  color: #333;
+}
+
+.checkout {
+  border: 1px solid black;
+  font-size: 20px;
+  padding: 5px 40px;
+  color: white;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkout:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

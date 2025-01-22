@@ -10,6 +10,7 @@ import Sidebar from './SideBar/Sidebar'
 import { IoMenu } from 'react-icons/io5'
 
 import './Navbar.css'
+import { useGetCategoriesQuery } from '../../../redux/api/categoryApiSlice'
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
@@ -22,7 +23,15 @@ const Navbar = () => {
     ? BASE_URL + '/' + userInfo.avatar
     : profileImg
   console.log(profile)
-
+  const { data: categories, isLoading, isError } = useGetCategoriesQuery()
+  let men
+  let women
+  let kids
+  if (!isLoading) {
+    men = categories.filter((category) => category.name == 'Men')[0]._id
+    women = categories.filter((category) => category.name == 'Women')[0]._id
+    kids = categories.filter((category) => category.name == 'Kids')[0]._id
+  }
   return (
     <>
       <div style={{ height: '65px' }}></div>
@@ -48,32 +57,42 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/shop_all"
+                to="/catalog"
                 className={({ isActive }) =>
                   isActive ? 'active navLink' : 'navLink'
                 }
               >
-                Shop All
+                Catalog
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/about"
+                to={`/category/${men}`}
                 className={({ isActive }) =>
                   isActive ? 'active navLink' : 'navLink'
                 }
               >
-                About
+                Men
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/contact"
+                to={`/category/${women}`}
                 className={({ isActive }) =>
                   isActive ? 'active navLink' : 'navLink'
                 }
               >
-                Contact
+                Women
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={`/category/${kids}`}
+                className={({ isActive }) =>
+                  isActive ? 'active navLink' : 'navLink'
+                }
+              >
+                Kids
               </NavLink>
             </li>
           </div>

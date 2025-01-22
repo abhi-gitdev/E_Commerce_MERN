@@ -15,6 +15,7 @@ import { Input, Stack, Textarea } from '@chakra-ui/react'
 import { useGetCategoriesQuery } from '../../redux/api/categoryApiSlice'
 import profileImg from './../../assets/profile.png'
 import ReviewCard from '../common/ReviewCard/ReviewCard'
+import { addToCart } from '../../redux/features/auth/cartSlice'
 const ProductPage = () => {
   const { userInfo } = useSelector((state) => state.auth)
   const profile = userInfo?.avatar
@@ -22,6 +23,7 @@ const ProductPage = () => {
     : profileImg
   const params = useParams()
   const dispatch = useDispatch()
+
   const [quantity, setQuantity] = useState(1)
   const [review, setReview] = useState({
     rating: 0,
@@ -69,7 +71,9 @@ const ProductPage = () => {
       )
     }
   }
-
+  const handleAddToCart = async () => {
+    dispatch(addToCart({ ...product, qty: quantity }))
+  }
   console.log(product)
   return (
     <>
@@ -139,7 +143,11 @@ const ProductPage = () => {
                     +
                   </button>
                 </div>
-                <button type="button" className="buyBtn">
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="buyBtn"
+                >
                   Add to Cart
                 </button>
               </div>

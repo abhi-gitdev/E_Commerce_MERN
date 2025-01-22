@@ -126,7 +126,12 @@
   transform: scale(1.02);
   opacity: 0.8;
 }
-
+.cartsDiv2 {
+  width: 25rem;
+}
+.cartsDiv2 p {
+  text-wrap: wrap;
+}
 .price {
   color: brown;
   font-size: 1.6vmax;
@@ -143,6 +148,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.qtyDiv p {
+  margin: 0;
 }
 .qtyDiv input {
   border: none;

@@ -16,6 +16,9 @@ import Footer from './components/common/footer/Footer'
 import './App.css'
 import UpdateProduct from './components/admin/Products/UpdateProduct'
 import ProductPage from './components/ProductPage/ProductPage'
+import CategoryProducts from './components/ProductPage/CategoryProducts'
+import Catalog from './components/ProductPage/Catalog'
+import Cart from './components/Cart/Cart'
 
 function App() {
   return (
@@ -24,10 +27,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/category/:id" element={<CategoryProducts />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="profile" element={<Profile />} />
           <Route path="my-orders" element={<Dropdown />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
         <Route path="/admin" element={<AdminRoute />}>
           <Route path="dashboard" element={<Dropdown />} />
