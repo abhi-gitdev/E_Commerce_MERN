@@ -37,27 +37,27 @@ const Dropdown = () => {
       <MenuList>
         <MenuGroup>
           <Link to={'/profile'}>
-            <MenuItem>Profile</MenuItem>
+            <MenuItem>Edit Profile</MenuItem>
           </Link>
           <Link to={'/my-orders'}>
             <MenuItem>My orders</MenuItem>
           </Link>
           {userInfo && userInfo.role == 'admin' && (
             <>
-              <Link to={'/admin/dashboard'}>
-                <MenuItem>Dashboard</MenuItem>
+              <Link to={'/admin/createProduct'}>
+                <MenuItem>Create Product</MenuItem>
+              </Link>
+              <Link to={'/admin/categoryList'}>
+                <MenuItem>Create Category</MenuItem>
               </Link>
               <Link to={'/admin/allProducts'}>
                 <MenuItem>Products</MenuItem>
               </Link>
-              <Link to={'/admin/categoryList'}>
-                <MenuItem>Category</MenuItem>
+              <Link to={'/admin/users'}>
+                <MenuItem>Users</MenuItem>
               </Link>
               <Link to={'/admin/orders'}>
                 <MenuItem>Orders</MenuItem>
-              </Link>
-              <Link to={'/admin/users'}>
-                <MenuItem>Users</MenuItem>
               </Link>
             </>
           )}

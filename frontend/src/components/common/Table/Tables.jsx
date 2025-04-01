@@ -128,14 +128,6 @@ const Tables = ({ columns, rows, name, update, deleteUser }) => {
                         </td>
                       )
                     })}
-                    <td className="options">
-                      <Link>
-                        <FiEdit2 className="opt" />
-                      </Link>
-                      <>
-                        <RiDeleteBinLine className="opt" />
-                      </>
-                    </td>
                   </tr>
                 )
               })}

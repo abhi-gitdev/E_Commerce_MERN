@@ -7,7 +7,7 @@ import userRoutes from './routes/userRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-
+import orderRoutes from './routes/orderRoutes.js'
 import cors from 'cors'
 
 configDotenv()
@@ -33,6 +33,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api/order', orderRoutes)
 
 app.listen(port, () => {
   console.log(`Running on server http://localhost:${port}`)

@@ -25,6 +25,7 @@ const CategoryForm = ({
           type="file"
           name="image"
           onChange={(e) => setImage(e.target.files[0])}
+          required
         />
         <div className="buttonDiv">
           <Button colorScheme="blue" variant="solid" type="submit">

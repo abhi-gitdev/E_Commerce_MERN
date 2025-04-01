@@ -14,6 +14,7 @@ const Home = () => {
   const images = [{ url: img1 }, { url: img2 }, { url: img3 }]
   const { data: categories, error, isLoading } = useGetCategoriesQuery()
   console.log(categories)
+
   return (
     <section className="home">
       <div className="header">

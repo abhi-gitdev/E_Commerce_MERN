@@ -1,6 +1,7 @@
 .actions {
   display: flex;
   position: absolute;
+  align-items: center;
   justify-content: flex-end;
   color: rgb(53, 53, 112);
   gap: 10px;
@@ -46,6 +47,7 @@
   width: 250px;
   height: 250px;
   border-bottom: 1px solid #f0f0f0;
+  object-fit: cover;
 }
 
 .productName {

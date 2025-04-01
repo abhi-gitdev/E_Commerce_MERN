@@ -5,12 +5,11 @@ import Loader from '../common/Loader/Loader'
 import { toast } from 'react-toastify'
 import { setCredentials } from '../../redux/features/auth/authSlice'
 import { indianStates, indianCities } from '../data/indiaData'
-import { RiUser3Fill, RiLockPasswordFill } from 'react-icons/ri'
+import { RiUser3Fill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
-import { FaAddressBook } from 'react-icons/fa6'
-import { FaPhoneAlt } from 'react-icons/fa'
-
+import { FaAddressBook, FaPhoneAlt } from 'react-icons/fa'
 import './Profile.css'
+
 const Profile = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -42,7 +41,6 @@ const Profile = () => {
     e.preventDefault()
     try {
       const res = await updateProfileApi(formData).unwrap()
-      console.log(res)
       dispatch(setCredentials({ ...res }))
       toast.success('Profile updated successfully')
     } catch (error) {
@@ -53,106 +51,93 @@ const Profile = () => {
   return (
     <section className="profileContainer">
       <form className="profile" onSubmit={handleUpdate}>
-        <div className="ipContainer slideUp">
-          <RiUser3Fill className="icon stick" />
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="firstName">First Name:</label>
+        <h2 className="profileTitle">Edit Profile</h2>
+        <div className="formGrid">
+          <div className="inputGroup">
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <label>Address</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="inputGroup selectGroup">
+            <label>State</label>
+            <select
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a state</option>
+              {indianStates.map((state, i) => (
+                <option key={`state-${i}`} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="inputGroup selectGroup">
+            <label>City</label>
+            <select
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a city</option>
+              {indianCities.map((city, i) => (
+                <option key={`city-${i}`} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="ipContainer slideUp">
-          <RiUser3Fill className="icon stick" />
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="lastName">Last Name:</label>
-        </div>
-        <div className="ipContainer slideUp">
-          <MdEmail className="icon stick" />
-
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="email">Email:</label>
-        </div>
-        <div className="ipContainer slideUp">
-          <FaPhoneAlt className="icon stick" />
-          <input
-            type="number"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="phone">Phone Number:</label>
-        </div>
-        <div className="ipContainer slideUp">
-          <FaAddressBook className="icon stick" />
-          <input
-            type="text"
-            name="address"
-            onChange={handleChange}
-            value={formData.address}
-            required
-          />
-          <label htmlFor="address">Address:</label>
-        </div>
-        <div
-          style={{
-            width: '100%',
-            justifyContent: 'space-evenly',
-            margin: '10px',
-          }}
-        >
-          <label htmlFor="state">State:</label>
-          <select
-            name="state"
-            className="selectField"
-            value={formData.state}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a state</option>
-            {indianStates.map((state, i) => (
-              <option key={`state-${i}`} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="city">City:</label>
-          <select
-            name="city"
-            className="selectField"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a city</option>
-            {indianCities.map((city, i) => (
-              <option key={`city-${i}`} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button
-          type="submit"
-          className="subBtn btn"
-          style={{ justifyContent: 'center', margin: '0', marginTop: '30px' }}
-        >
-          Update
+        <button type="submit" className="submitBtn">
+          Update Profile
         </button>
       </form>
     </section>

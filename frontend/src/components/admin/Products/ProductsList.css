@@ -115,6 +115,7 @@
 .productsCards {
   width: 100%;
   align-items: center;
+  justify-content: space-around;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

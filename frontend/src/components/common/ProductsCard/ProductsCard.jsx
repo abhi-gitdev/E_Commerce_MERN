@@ -7,6 +7,7 @@ import { MdDelete, MdEdit } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useDeleteProductMutation } from '../../../redux/api/productSlice'
+import HeartIcon from './HeartIcon'
 
 const ProductsCard = ({ product, refetch }) => {
   const [deleteProduct] = useDeleteProductMutation()
@@ -35,15 +36,18 @@ const ProductsCard = ({ product, refetch }) => {
   return (
     <>
       <div className="productCard">
-        {userInfo.role == 'admin' && (
-          <div className="actions">
-            <MdDelete className="icon" onClick={handleDelete} />
-            <MdEdit
-              className="icon"
-              onClick={() => navigate(`/admin/updateProduct/${product._id}`)}
-            />
-          </div>
-        )}
+        <div className="actions">
+          <HeartIcon product={product} className="icon"></HeartIcon>
+          {userInfo?.role == 'admin' && (
+            <>
+              <MdDelete className="icon" onClick={handleDelete} />
+              <MdEdit
+                className="icon"
+                onClick={() => navigate(`/admin/updateProduct/${product._id}`)}
+              />
+            </>
+          )}
+        </div>
         <img
           src={`${BASE_URL}/product/${product?.images[0]}`}
           alt={product.name}

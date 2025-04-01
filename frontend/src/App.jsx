@@ -19,6 +19,8 @@ import ProductPage from './components/ProductPage/ProductPage'
 import CategoryProducts from './components/ProductPage/CategoryProducts'
 import Catalog from './components/ProductPage/Catalog'
 import Cart from './components/Cart/Cart'
+import Shop from './components/Shop/Shop'
+import Shipping from './components/Shipping/Shipping'
 
 function App() {
   return (
@@ -27,17 +29,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog" element={<Shop />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/category/:id" element={<CategoryProducts />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="profile" element={<Profile />} />
-          <Route path="my-orders" element={<Dropdown />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="shipping" element={<Shipping />} />
         </Route>
         <Route path="/admin" element={<AdminRoute />}>
-          <Route path="dashboard" element={<Dropdown />} />
-          <Route path="orders" element={<Dropdown />} />
           <Route path="users" element={<UsersList />} />
           <Route path="categoryList" element={<CategoryList />} />
           <Route path="createProduct" element={<CreateProduct />} />

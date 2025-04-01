@@ -1,0 +1,40 @@
+.ProductsPage {
+  display: flex;
+}
+.filterContainer {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: 30px;
+  width: 300px;
+}
+.filterContainer h2 {
+  font-weight: 550;
+  font-size: 18px;
+  margin-top: 10px;
+}
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.listContainer div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.resetBtn {
+  background-color: #522e2e;
+  color: white;
+  padding: 5px 25px;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 15px;
+}
+.resetBtn:hover {
+  background-color: rgba(82, 46, 46, 0.8);
+}
+.listContainer input {
+  border: 1px solid black;
+}

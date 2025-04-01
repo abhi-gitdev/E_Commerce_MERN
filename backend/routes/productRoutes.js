@@ -13,6 +13,7 @@ import {
   getTopProducts,
   getNewProducts,
   getCategoryProducts,
+  getFilteredProducts,
 } from '../controllers/productController.js'
 import multer from 'multer'
 
@@ -38,7 +39,7 @@ router.route('/allProducts').get(getAllProducts)
 router.route('/top').get(getTopProducts)
 router.route('/new').get(getNewProducts)
 router.route('/:id/reviews').post(authenticate, addProductReview)
-
+router.route('/filtered_products').post(getFilteredProducts)
 router.route('/getCategoryProducts/:id').get(getCategoryProducts)
 router
   .route('/:id')
