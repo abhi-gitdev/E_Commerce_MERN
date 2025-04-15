@@ -1,52 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 .categories {
-  margin: 25px 0;
+    margin: 2rem 0;
+    padding: 1rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .manageCategory {
-  font-size: 30px;
-  font-weight: 550;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2d3748; /* Darker text */
 }
+
 .categoryForm {
-  width: 100%;
+    width: 100%;
+    margin-top: 1rem;
 }
+
 .categoryForm input,
 .buttonDiv {
-  margin: 10px 0;
+    margin: 0.75rem 0;
 }
 
 .categoriesList {
-  display: flex;
-  gap: 10px;
-  margin: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.categoriesList button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0; /* Light border */
+    border-radius: 0.25rem;
+    background-color: #edf2f7; /* Light background */
+    color: #2d3748;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.categoriesList button:hover {
+    background-color: #d1d5db; /* Darker hover background */
+    border-color: #a0aec0; /* Darker hover border */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
 .modal {
-  position: fixed;
-  top: 30vh;
-  left: 30%;
-  width: 40%;
-  background-color: aliceblue;
-  padding: 30px 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff; /* White modal background */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 600px; /* Maximum width */
 }
+
 .modal > div {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
+
 .buttonDiv {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
 }
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+
+.buttonDiv button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.buttonDiv button:first-child {
+    background-color: #4299e1; /* Primary button color */
+    color: #ffffff;
+}
+
+.buttonDiv button:last-child {
+    background-color: #e53e3e; /* Delete button color */
+    color: #ffffff;
+}
+
+.buttonDiv button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 95%; /* Adjust for smaller screens */
+    }
 }

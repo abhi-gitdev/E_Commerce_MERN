@@ -1,26 +1,26 @@
-import Login from './components/auth/login/Login'
-import Register from './components/auth/register/Register'
-import Dropdown from './components/common/dropdown/Dropdown'
-import Navbar from './components/common/Navbar/Navbar'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import PrivateRoute from './components/PrivateRoute'
-import Profile from './components/user/Profile'
-import AdminRoute from './components/AdminRoute'
-import UsersList from './components/admin/UsersList/UsersList'
-import CategoryList from './components/admin/CategoryList/CategoryList'
-import CreateProduct from './components/admin/Products/CreateProduct'
-import ProductsList from './components/admin/Products/ProductsList'
-import Home from './components/Home/Home'
-import AllProducts from './components/admin/Products/AllProducts'
-import Footer from './components/common/footer/Footer'
-import './App.css'
-import UpdateProduct from './components/admin/Products/UpdateProduct'
-import ProductPage from './components/ProductPage/ProductPage'
-import CategoryProducts from './components/ProductPage/CategoryProducts'
-import Catalog from './components/ProductPage/Catalog'
-import Cart from './components/Cart/Cart'
-import Shop from './components/Shop/Shop'
-import Shipping from './components/Shipping/Shipping'
+import Login from "./components/auth/login/Login";
+import Register from "./components/auth/register/Register";
+import Dropdown from "./components/common/dropdown/Dropdown";
+import Navbar from "./components/common/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./components/user/Profile";
+import AdminRoute from "./components/AdminRoute";
+import UsersList from "./components/admin/UsersList/UsersList";
+import CategoryList from "./components/admin/CategoryList/CategoryList";
+import CreateProduct from "./components/admin/Products/CreateProduct";
+import ProductsList from "./components/admin/Products/ProductsList";
+import Home from "./components/Home/Home";
+import AllProducts from "./components/admin/Products/AllProducts";
+import Footer from "./components/common/footer/Footer";
+import "./App.css";
+import UpdateProduct from "./components/admin/Products/UpdateProduct";
+import ProductPage from "./components/ProductPage/ProductPage";
+import CategoryProducts from "./components/ProductPage/CategoryProducts";
+import Catalog from "./components/ProductPage/Catalog";
+import Cart from "./components/Cart/Cart";
+import Shop from "./components/Shop/Shop";
+import Shipping from "./components/Shipping/Shipping";
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Shop />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/category/:id" element={<CategoryProducts />} />
@@ -49,7 +50,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

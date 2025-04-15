@@ -1,20 +1,35 @@
+/* Center the loader */
 .loader-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* position: absolute; */
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  font-family: 'Roboto', sans-serif;
 }
 
+/* Loader animation */
 .loader {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #000000;
+  border: 12px solid #f3f3f3;
+  border-top: 12px solid #3498db; /* Blue color */
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   animation: spin 1.5s linear infinite;
 }
 
+/* Loading text */
+.loader-container p {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #3498db;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Spinning animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -22,10 +37,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-p {
-  margin-top: 10px;
-  font-size: 1.2rem;
-  color: #000000;
 }

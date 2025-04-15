@@ -1,33 +1,47 @@
-import React from 'react'
-import { GrLanguage } from 'react-icons/gr'
-import { Link } from 'react-router-dom'
-import { RxCross2 } from 'react-icons/rx'
-import './Sidebar.css'
-import { useGetCategoriesQuery } from '../../../../redux/api/categoryApiSlice'
+import React, { useEffect } from "react";
+import { GrLanguage } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
+import "./Sidebar.css";
+import { useGetCategoriesQuery } from "../../../../redux/api/categoryApiSlice";
 
 const Sidebar = ({ open, setOpen }) => {
-  const userInfo = localStorage.getItem('userInfo')
-  console.log(userInfo)
-  const { data: categories, isLoading, isError } = useGetCategoriesQuery()
-  let men
-  let women
-  let kids
-  if (!isLoading) {
-    men = categories.filter((category) => category.name == 'Men')[0]._id
-    women = categories.filter((category) => category.name == 'Women')[0]._id
-    kids = categories.filter((category) => category.name == 'Kids')[0]._id
-  }
+  const userInfo = localStorage.getItem("userInfo");
+  const { data: categories, isLoading } = useGetCategoriesQuery();
+
+  // Prevent unnecessary re-renders
+  const men = !isLoading
+    ? categories.find((cat) => cat.name === "Men")?._id
+    : "";
+  const women = !isLoading
+    ? categories.find((cat) => cat.name === "Women")?._id
+    : "";
+  const kids = !isLoading
+    ? categories.find((cat) => cat.name === "Kids")?._id
+    : "";
+
+  // Close sidebar on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (open && !event.target.closest(".sideBar")) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [open, setOpen]);
+
   return (
-    <div className="sideBar">
-      <button onClick={() => setOpen(!open)} className="cross">
+    <div className={`sideBar ${open ? "open" : ""}`}>
+      <button onClick={() => setOpen(false)} className="cross">
         <RxCross2 />
       </button>
       <ul>
         <li>
-          <Link to={'/'}>Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to={'/catalog'}>Catalog</Link>
+          <Link to="/catalog">Catalog</Link>
         </li>
         <li>
           <Link to={`/category/${men}`}>Men</Link>
@@ -47,7 +61,7 @@ const Sidebar = ({ open, setOpen }) => {
         )}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

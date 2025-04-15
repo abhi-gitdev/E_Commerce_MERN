@@ -1,5 +1,5 @@
-import express from 'express'
-import { authenticate, authorized } from './../middlewares/authMiddleware.js'
+import express from "express";
+import { authenticate, authorized } from "./../middlewares/authMiddleware.js";
 import {
   createOrder,
   getAllOrders,
@@ -10,20 +10,22 @@ import {
   findOrderById,
   markOrderAsDelivered,
   markOrderAsPaid,
-} from '../controllers/orderController.js'
-const router = express.Router()
+} from "../controllers/orderController.js";
+const router = express.Router();
 
 router
-  .route('/')
+  .route("/")
   .post(authenticate, createOrder)
-  .get(authenticate, authorized, getAllOrders)
+  .get(authenticate, authorized, getAllOrders);
 
-router.route('/mine').get(authenticate, getUserOrders)
-router.route('/total-orders').get(countTotalOrders)
-router.route('/total-sales').get(calculateTotalSales)
-router.route('/total-sales-by-date').get(calculateTotalSalesByDate)
-router.route('/:id').get(authenticate, findOrderById)
-router.route('/:id/pay').put(authenticate, markOrderAsPaid)
-router.route('/:id/deliver').put(authenticate, authorized, markOrderAsDelivered)
+router.route("/mine").get(authenticate, getUserOrders);
+router.route("/total-orders").get(countTotalOrders);
+router.route("/total-sales").get(calculateTotalSales);
+router.route("/total-sales-by-date").get(calculateTotalSalesByDate);
+router.route("/:id").get(authenticate, findOrderById);
+router.route("/:id/pay").put(authenticate, markOrderAsPaid);
+router
+  .route("/:id/deliver")
+  .put(authenticate, authorized, markOrderAsDelivered);
 
-export default router
+export default router;

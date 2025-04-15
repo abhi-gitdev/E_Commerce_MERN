@@ -1,19 +1,19 @@
-import React from 'react'
-import SimpleImageSlider from 'react-simple-image-slider'
-import img1 from './../../assets/wallpaper1.png'
-import img2 from './../../assets/wallpaper2.png'
-import img3 from './../../assets/wallpaper3.png'
-import { useGetCategoriesQuery } from '../../redux/api/categoryApiSlice'
-import GetTopProducts from './GetTopProducts'
-import './Home.css'
-import NewProducts from './NewProducts'
-import { BASE_URL } from '../../redux/constants'
-import { Link } from 'react-router-dom'
+import React from "react";
+import SimpleImageSlider from "react-simple-image-slider";
+import img1 from "./../../assets/wallpaper1.png";
+import img2 from "./../../assets/wallpaper2.png";
+import img3 from "./../../assets/wallpaper3.png";
+import { useGetCategoriesQuery } from "../../redux/api/categoryApiSlice";
+import GetTopProducts from "./GetTopProducts";
+import "./Home.css";
+import NewProducts from "./NewProducts";
+import { BASE_URL } from "../../redux/constants";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const images = [{ url: img1 }, { url: img2 }, { url: img3 }]
-  const { data: categories, error, isLoading } = useGetCategoriesQuery()
-  console.log(categories)
+  const images = [{ url: img1 }, { url: img2 }, { url: img3 }];
+  const { data: categories, error, isLoading } = useGetCategoriesQuery();
+  console.log(categories);
 
   return (
     <section className="home">
@@ -40,7 +40,7 @@ const Home = () => {
                   />
                   <p>{category.name}</p>
                 </Link>
-              )
+              );
             })}
           </div>
         </div>
@@ -48,7 +48,7 @@ const Home = () => {
       <GetTopProducts />
       <NewProducts />
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
